@@ -7,4 +7,16 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+import Vue from 'vue'
+import ApiTest from './api_test.vue'
+
+Vue.component("api-test", ApiTest)
+
+window.vbus = new Vue()
+window.$vue_data = {}
+window.Vue = Vue
+
+document.addEventListener('DOMContentLoaded', () => {
+  new Vue({ el: '#vue_root', data: window.$vue_data })
+})
+
