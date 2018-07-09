@@ -11,6 +11,13 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require material-components-web/dist/material-components-web
  *= require semantic-ui-css/semantic
  *= require_self
  */
+
+.root_container {
+  margin-top: 80px;
+  margin-left: 20px;
+  margin-left: 20px;
+}

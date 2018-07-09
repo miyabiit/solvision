@@ -12,7 +12,8 @@
   </head>
 
   <body>
-    <div id="vue_root">
+    <%= render 'layouts/nav' %>
+    <div id="vue_root" class="root_container">
       <%= yield %>
     </div>
   </body>
