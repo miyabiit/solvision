@@ -45,6 +45,7 @@ gem 'enumerize'
 gem 'active_attr'
 gem 'seed-fu', '~> 2.3'
 gem 'faraday'
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
