@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 20px">
+  <div>
     <h1>API Tester</h1>
     URL: <input type="text" style="width: 400px" v-model="url">
     <br/>
