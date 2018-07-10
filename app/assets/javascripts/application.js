@@ -14,7 +14,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require material-components-web/dist/material-components-web
 //= require semantic-ui-css/semantic
 //= require csrf_token
 //= require_tree .
