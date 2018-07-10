@@ -1,0 +1,58 @@
+ja:
+  active_record:
+    models:
+      user: 'アカウント'
+    attributes:
+      user:
+        email: 'メールアドレス'
+        name: 'ユーザー名'
+        login: 'メールアドレスまたはユーザー名'
+        password: 'パスワード'
+        password_confirmation: 'パスワード（確認）'
+        remember_me: 'ログイン状態を保持する'
+        new_password: '新パスワード'
+        new_password_confirmation: '新パスワード（確認）'
+        current_password: '現パスワード'
+
+  users:
+    sign_in:
+      link: 'ログインする'
+      title: 'ログイン'
+      button: 'ログイン'
+    sign_out:
+      button: 'ログアウト'
+    sign_up:
+      title: '新規登録'
+      link: '新規登録'
+      button: '新規登録'
+    sign_out:
+      button: 'ログアウト'
+    password:
+      new:
+        link: 'パスワードを忘れた方はこちら'
+        title: 'パスワードのリセット'
+        button: 'パスワードをリセットする'
+      edit:
+        title: 'パスワード変更'
+        button: 'パスワード変更'
+    confirmation:
+      new:
+        link: '登録確認メールを再送信する'
+        title: '登録確認メールの再送信'
+        button: '登録確認メールの再送信'
+    unlock:
+      new:
+        link: 'ロック解除メールを再送信する'
+        title: 'ロック解除メールの再送信'
+        button: 'ロック解除メールの再送信'
+    registration:
+      edit:
+        link: 'アカウント変更'
+        title: 'アカウント変更'
+        button: 'アカウント変更'
+        password_help: '（パスワードを変更したくない場合は、空白のままにして下さい。）'
+    delete:
+      title: アカウント削除
+      button: アカウント削除
+      confirmation: アカウントを削除します。よろしいですか？
+

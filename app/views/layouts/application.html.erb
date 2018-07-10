@@ -8,13 +8,18 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <%# self hosting したいのだが、うまくいってないので、一先ずCDNリンク %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <%= javascript_pack_tag 'application' %>
   </head>
 
-  <body>
-    <%= render 'layouts/nav' %>
-    <div id="vue_root" class="root_container">
-      <%= yield %>
+  <body class="mdc-typography">
+    <div id="vue_root">
+      <%= render 'layouts/nav' %>
+      <div class="root_container">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

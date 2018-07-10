@@ -9,8 +9,10 @@
 
 import Vue from 'vue'
 import ApiTest from './api_test.vue'
+import NavDrawer from './nav_drawer.vue'
 
 Vue.component("api-test", ApiTest)
+Vue.component("nav-drawer", NavDrawer)
 
 window.vbus = new Vue()
 window.$vue_data = {}

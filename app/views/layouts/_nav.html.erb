@@ -1,10 +1,10 @@
 <nav class="mdc-toolbar mdc-toolbar--fixed">
   <div class="mdc-toolbar__row">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+      <nav-drawer></nav-drawer>
       <span class="mdc-toolbar__title catalog-title"><%== ['Solvision', (yield(:title).presence&.html_safe)].compact.join(' : ')%></span>
     </section>
     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-      <%= yield :tools %>
     </section>
   </div>
 </nav>
