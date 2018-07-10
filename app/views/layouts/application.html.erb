@@ -18,8 +18,8 @@
     <div id="vue_root">
       <%= render 'layouts/nav' %>
       <div class="root_container">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <message-bar :init-message="'<%= notice.presence || alert.presence || '' %>'"></message-bar>
+        <spinner></spinner>
         <%= yield %>
       </div>
     </div>

@@ -7,7 +7,7 @@
       <nav class="mdc-drawer__drawer">
         <div class="mdc-list-group">
           <nav id="icon-with-text-demo" class="mdc-list">
-            <a class="mdc-list-item" href="#" data-mdc-tabindex-handled="true" tabindex="-1">
+            <a rel="nofollow" data-method="delete" href="/users/sign_out"class="mdc-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
               <i class="material-icons mdc-list-item__start-detail" style="color: black !important" aria-hidden="true">exit_to_app</i>&nbsp;ログアウト
             </a>
           </nav>

@@ -10,9 +10,13 @@
 import Vue from 'vue'
 import ApiTest from './api_test.vue'
 import NavDrawer from './nav_drawer.vue'
+import MessageBar from './message_bar.vue'
+import Spinner from './spinner.vue'
 
 Vue.component("api-test", ApiTest)
 Vue.component("nav-drawer", NavDrawer)
+Vue.component("message-bar", MessageBar)
+Vue.component("spinner", Spinner)
 
 window.vbus = new Vue()
 window.$vue_data = {}
