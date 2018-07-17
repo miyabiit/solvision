@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      facility: '発電施設'
+    attributes:
+      facility:
+        name: '施設名'
+        geocode: 'ジオコード'
+        capacity_value: '設備容量(kW)'
+        capacity_date: '設備容量変更日'
+        sales_type: '買取種別'
+  enumerize:
+    facility:
+      sales_type:
+        normal: '通常'
+        premium: 'プレミアム'

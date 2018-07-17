@@ -1,0 +1,67 @@
+<%= form_with(model: facility, local: true, html: {class: 'ui form'}) do |form| %>
+  <% if facility.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t 'activerecord.errors.messages.record_invalid', errors: '' %></h2>
+
+      <ul>
+      <% facility.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :geocode %>
+    <%= form.text_field :geocode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sales_type %>
+    <%= form.select :sales_type, Facility.sales_type.options, {}, class: 'ui fluid dropdown' %>
+  </div>
+
+  <div class="two fields">
+    <div class="field">
+      <%= form.label :capacity_value %>
+      <%= form.text_field :capacity_value %>
+    </div>
+    <div class="field">
+      <%= form.label :capacity_date %>
+      <%= form.date_field :capacity_date, pattern: "[0-9]{4}-[0-9]{2}-[0-9]{2}", placeholder: 'yyyy-mm-dd' %>
+    </div>
+  </div>
+
+  <% if form.object.facility_capacities.present? %>
+    <h2>設備容量変更履歴</h2>
+    <table class="ui table">
+      <thead>
+        <tr>
+          <th>設備容量(kW)</th>
+          <th>変更日</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% form.object.facility_capacities.order(date: :desc).each do |capacity| %>
+          <tr>
+            <td><%= capacity.value %></td>
+            <td><%= capacity.date %></td>
+            <td>
+              <%= link_to '削除', capacity, method: :delete, data: { confirm: '削除してもいいですか？' }, class: 'ui red button' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to '削除', facility, method: :delete, data: { confirm: '削除してもいいですか？' }, class: 'ui red button' %>
+    <%= form.submit(form.object.new_record? ? '作成' : '更新', class: 'ui primary button') %>
+  </div>
+<% end %>
