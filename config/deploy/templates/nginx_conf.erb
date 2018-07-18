@@ -61,6 +61,7 @@ server {
     # limit_req zone=one;
     access_log <%= shared_path %>/log/nginx.access.log;
     error_log <%= shared_path %>/log/nginx.error.log;
+    proxy_set_header X-Forwarded-Port 8080;
   }
 
   location ^~ /assets/ {
