@@ -109,3 +109,20 @@ table.table {
   --mdc-theme-primary: #0e4ead;
   --mdc-theme-secondary: #0060e6;
 }
+
+select.no-appearance {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.no-margin-grid {
+  margin: 0;
+  padding: 0;
+}
+
+.ui.input.number {
+  input {
+    text-align: right;
+  }
+}

@@ -10,6 +10,9 @@
             <a href="/facilities"class="mdc-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
               <i class="material-icons mdc-list-item__start-detail" style="color: black !important" aria-hidden="true">brightness_low</i>&nbsp;発電施設
             </a>
+            <a href="/monthly_receipts"class="mdc-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+              <i class="material-icons mdc-list-item__start-detail" style="color: black !important" aria-hidden="true">receipt</i>&nbsp;入金実績
+            </a>
           </nav>
           <hr class="mdc-list-divider">
           <nav class="mdc-list">

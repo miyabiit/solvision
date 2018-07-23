@@ -1,0 +1,4 @@
+{
+  facilities: @facilities.map(&:attributes),
+  receipts: @receipts.map(&:attributes)
+}

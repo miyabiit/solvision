@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_23_064715) do
+ActiveRecord::Schema.define(version: 2018_07_30_124407) do
 
   create_table "facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 2018_07_23_064715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["facility_id"], name: "index_facility_capacities_on_facility_id"
+  end
+
+  create_table "monthly_receipts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "facility_id", null: false
+    t.string "year_month", null: false
+    t.bigint "amount", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "receipt_date"
+    t.string "receipt_from"
+    t.index ["facility_id"], name: "index_monthly_receipts_on_facility_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -47,4 +58,5 @@ ActiveRecord::Schema.define(version: 2018_07_23_064715) do
   end
 
   add_foreign_key "facility_capacities", "facilities"
+  add_foreign_key "monthly_receipts", "facilities"
 end
