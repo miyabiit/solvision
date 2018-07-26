@@ -31,7 +31,7 @@
   text-transform: none;
 }
 
-.root_container {
+.main-content {
   margin-top: 80px;
   margin-left: 20px;
   margin-left: 20px;
@@ -99,4 +99,13 @@ td.center, th.center {
 
 .mdc-snackbar {
   z-index: 9999;
+}
+
+table.table {
+  width: 80% !important;
+}
+
+:root {
+  --mdc-theme-primary: #0e4ead;
+  --mdc-theme-secondary: #0060e6;
 }

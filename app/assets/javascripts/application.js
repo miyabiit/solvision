@@ -13,7 +13,6 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require semantic-ui-css/semantic
 //= require csrf_token
 //= require_tree .

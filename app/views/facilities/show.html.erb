@@ -1,0 +1,14 @@
+<%= link_to '戻る', facilities_path, class: 'ui button' %>
+
+<table class="ui table definition">
+  <tr>
+    <td width="100">施設名</td>
+    <td><%= @facility.name %></td>
+  </tr>
+  <tr>
+    <td>ジオコード</td>
+    <td><%= @facility.geocode %></td>
+  </tr>
+</table>
+
+<%= link_to '編集', edit_facility_path(@facility), class: 'ui button primary' %>

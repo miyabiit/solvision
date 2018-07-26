@@ -1,5 +1,5 @@
 ja:
-  active_record:
+  activerecord:
     models:
       user: 'アカウント'
     attributes:
