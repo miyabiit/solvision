@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_30_124407) do
+ActiveRecord::Schema.define(version: 2018_08_06_023814) do
 
   create_table "facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -35,9 +35,17 @@ ActiveRecord::Schema.define(version: 2018_07_30_124407) do
     t.bigint "amount", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["facility_id"], name: "index_monthly_receipts_on_facility_id"
+  end
+
+  create_table "receipts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "monthly_receipt_id", null: false
+    t.bigint "amount", default: 0, null: false
     t.date "receipt_date"
     t.string "receipt_from"
-    t.index ["facility_id"], name: "index_monthly_receipts_on_facility_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["monthly_receipt_id"], name: "index_receipts_on_monthly_receipt_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -59,4 +67,5 @@ ActiveRecord::Schema.define(version: 2018_07_30_124407) do
 
   add_foreign_key "facility_capacities", "facilities"
   add_foreign_key "monthly_receipts", "facilities"
+  add_foreign_key "receipts", "monthly_receipts"
 end

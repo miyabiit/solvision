@@ -1,4 +1,18 @@
 {
-  facilities: @facilities.map(&:attributes),
-  receipts: @receipts.map(&:attributes)
+  facilities: @facilities.as_json,
+  monthly_receipts: @monthly_receipts.map {|mr|
+    {
+      id: mr.id,
+      facility_id: mr.facility_id,
+      amount: mr.amount,
+      receipts: mr.receipts.map {|r|
+        {
+          id: r.id,
+          receipt_from: r.receipt_from,
+          receipt_date: r.receipt_date,
+          amount: r.amount
+        }
+      }
+    }
+  }
 }

@@ -12,7 +12,7 @@ class MonthlyReceiptsController < ApplicationController
     respond_to do |format|
       format.json do
         @facilities = Facility.all
-        @receipts = MonthlyReceipt.where(year_month: Date.new(@year, @month, 1).strftime('%Y%m'))
+        @monthly_receipts = MonthlyReceipt.includes(:receipts).where(year_month: Date.new(@year, @month, 1).strftime('%Y%m'))
       end
       format.html do
       end
@@ -68,16 +68,28 @@ class MonthlyReceiptsController < ApplicationController
 
     year_month = Date.new(@year, @month, 1).strftime('%Y%m')
 
-    receipt_params = params[:receipts]
-    receipt_params.each do |receipt_param|
-      receipt = MonthlyReceipt.find_or_initialize_by(facility_id: receipt_param['facilityId'], year_month: year_month)
-      receipt.amount = receipt_param['amount']
-      receipt.receipt_date = receipt_param['receiptDate']
-      receipt.receipt_from = receipt_param['receiptFrom']
-      receipt.save!
+    monthly_receipt_params = params[:monthlyReceipts]
+    monthly_receipt_params.each do |monthly_receipt_param|
+      monthly_receipt = MonthlyReceipt.find_or_create_by(facility_id: monthly_receipt_param['facilityId'], year_month: year_month)
+      monthly_receipt.receipts.where.not(id: monthly_receipt_param['receipts'].map{|r| r['id']&.to_i}.compact).destroy_all
+      monthly_receipt_param['receipts'].each do |receipt_param|
+        receipt = if receipt_param['id'].present?
+                    Receipt.find(receipt_param['id'])
+                  else
+                    monthly_receipt.receipts.build
+                  end
+        receipt.amount = receipt_param['amount']
+        receipt.receipt_date = receipt_param['receiptDate']
+        receipt.receipt_from = receipt_param['receiptFrom']
+        receipt.save!
+      end
+      monthly_receipt.update_amount!
     end
 
-    render json: {}, status: :ok
+    @facilities = Facility.all
+    @monthly_receipts = MonthlyReceipt.includes(:receipts).where(year_month: Date.new(@year, @month, 1).strftime('%Y%m'))
+
+    render 'index'
   rescue ActiveRecord::RecordInvalid => ex
     render json: {error: {messages: ex.record.errors.full_mesages}}, status: :unprocessable_entity
   end

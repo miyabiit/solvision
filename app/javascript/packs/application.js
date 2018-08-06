@@ -15,6 +15,7 @@ import Spinner from './spinner.vue'
 import MonthPicker from './month_picker.vue'
 import InputReceipts from './input_receipts.vue'
 import VueNumeric from 'vue-numeric'
+import Vue2Filters from 'vue2-filters'
 
 Vue.component("api-test", ApiTest)
 Vue.component("nav-drawer", NavDrawer)
@@ -23,6 +24,8 @@ Vue.component("spinner", Spinner)
 Vue.component("month-picker", MonthPicker)
 Vue.component("input-receipts", InputReceipts)
 Vue.component("vue-numeric", VueNumeric)
+
+Vue.use(Vue2Filters)
 
 window.vbus = new Vue()
 window.$vue_data = {}
