@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      monthly_receipt: '入金実績'
+    attributes:
+      monthly_receipt:
+        facility: '施設'
+        facility_id: '施設'
+        year_month: '年月'
+        amount: '金額'

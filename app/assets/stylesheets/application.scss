@@ -35,6 +35,7 @@
   margin-top: 80px;
   margin-left: 20px;
   margin-left: 20px;
+  padding-bottom: 80px;
 }
 
 #vue_root {
@@ -108,4 +109,21 @@ table.table {
 :root {
   --mdc-theme-primary: #0e4ead;
   --mdc-theme-secondary: #0060e6;
+}
+
+select.no-appearance {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.no-margin-grid {
+  margin: 0;
+  padding: 0;
+}
+
+.ui.input.number {
+  input {
+    text-align: right;
+  }
 }

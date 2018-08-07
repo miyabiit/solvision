@@ -1,0 +1,34 @@
+<%= form_with(model: monthly_receipt, local: true, html: {class: 'ui form'}) do |form| %>
+  <%# TODO: 共通化 %>
+  <% if monthly_receipt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t 'activerecord.errors.messages.record_invalid', errors: '' %></h2>
+
+      <ul>
+      <% monthly_receipt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :facility_id %>
+    <%= form.select :facility_id, Facility.all.map { |f| [f.name, f.id] }, {}, class: 'ui fluid dropdown' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :year_month %>
+    <%= form.text_field :year_month, placeholder: 'yyyymm' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="actions">
+    <%= link_to '削除', monthly_receipt, method: :delete, data: { confirm: '削除してもいいですか？' }, class: 'ui red button' %>
+    <%= form.submit(form.object.new_record? ? '作成' : '更新', class: 'ui primary button') %>
+  </div>
+<% end %>
