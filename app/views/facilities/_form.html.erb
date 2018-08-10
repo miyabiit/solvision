@@ -26,10 +26,19 @@
     <%= form.select :sales_type, Facility.sales_type.options, {}, class: 'ui fluid dropdown' %>
   </div>
 
-  <div class="two fields">
+  <div class="field">
+    <%= form.label :unit_price %>
+    <%= form.number_field :unit_price %>
+  </div>
+
+  <div class="three fields">
     <div class="field">
       <%= form.label :capacity_value %>
-      <%= form.text_field :capacity_value %>
+      <%= form.number_field :capacity_value %>
+    </div>
+    <div class="field">
+      <%= form.label :capacity_unit_count %>
+      <%= form.number_field :capacity_unit_count %>
     </div>
     <div class="field">
       <%= form.label :capacity_date %>
@@ -43,13 +52,16 @@
       <thead>
         <tr>
           <th>設備容量(kW)</th>
+          <th>ユニット数</th>
           <th>変更日</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <% form.object.facility_capacities.order(date: :desc).each do |capacity| %>
           <tr>
             <td><%= capacity.value %></td>
+            <td><%= capacity.unit_count %></td>
             <td><%= capacity.date %></td>
             <td>
               <%= link_to '削除', capacity, method: :delete, data: { confirm: '削除してもいいですか？' }, class: 'ui red button' %>
@@ -59,6 +71,34 @@
       </tbody>
     </table>
   <% end %>
+
+  <h2>Solars発電所データ連携設定</h2>
+  <div id="facility_aliases">
+    <%= form.fields_for :facility_aliases do |facility_alias| %>
+      <%= render 'facility_alias_fields', f: facility_alias %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association '＋連携情報追加', form, :facility_aliases %>
+    </div>
+  </div>
+  
+  <br>
+  <br>
+
+  <h2>Shabotプロジェクトデータ連携設定</h2>
+  <div id="facility_projects">
+    <%= form.fields_for :facility_projects do |facility_project| %>
+      <%= render 'facility_project_fields', f: facility_project %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association '＋連携情報追加', form, :facility_projects %>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <hr>
 
   <div class="actions">
     <%= link_to '削除', facility, method: :delete, data: { confirm: '削除してもいいですか？' }, class: 'ui red button' %>

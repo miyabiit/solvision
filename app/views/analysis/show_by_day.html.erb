@@ -1,0 +1,43 @@
+<%= link_to '戻る', "/analysis/#{@year}/facilities/#{@facility.id}", class: 'ui button' %>
+<br>
+<br>
+
+<project-graph :x-axis-type="'day'" :records='<%= raw render('show_by_day_records.json').to_json %>'></project-graph>
+
+<table  class="ui table" style="width: 420px !important">
+  <thead>
+    <tr>
+      <th>対象年月</th>
+      <th>発電所</th>
+      <th>設備容量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @year %>年<%= @month %>月</td>
+      <td><%= @facility.name %></td>
+      <td><%= @facility.last_capacity&.value&.to_s(:delimited) %>kw</td>
+    </tr>
+  </tbody>
+</table>
+
+<%= render 'show_by_day_table' %>
+
+<table  class="ui table" style="width: 420px !important">
+  <thead>
+    <tr>
+      <th>売電予測</th>
+      <th>売電金額</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @records.map {|r| r.kwh || r.estimate_kwh || 0}.sum.to_i.to_s(:delimted) %> kwh</td>
+      <td>
+        <%= @facility.kwh_to_sales(@records.map {|r| r.kwh || r.estimate_kwh || 0}.sum).to_i.to_s(:delimited) %> 円（税込）
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<%= render 'show_shabot_receipt' %>

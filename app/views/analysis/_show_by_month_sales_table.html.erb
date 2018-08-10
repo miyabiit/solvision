@@ -1,0 +1,52 @@
+<h2>月別売電実績</h2>
+<table class="table ui">
+  <colgroup>
+    <col style="width: 120px">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>年月</th>
+      <th>売電金額(円)</th>
+      <th>入金実績(円)</th>
+      <th>支払金額(円)</th>
+      <th>粗利益(円)</th>
+      <th>前年入金実績(円)</th>
+    </tr>
+  </thead>
+  <% sum_sales_amount = 0 %>
+  <% sum_receipts = 0 %>
+  <% sum_payments = 0 %>
+  <% sum_prev_year_receipts = 0 %>
+  <tbody>
+    <% @records.each do |record| %>
+      <% month_date = Date.strptime(record.month, '%Y%m') -%>
+      <% receipt_amount = @facility.monthly_receipts.find_by(year_month: month_date.strftime('%Y%m'))&.amount %>
+      <% prev_year_receipt_amount = @facility.monthly_receipts.find_by(year_month: month_date.prev_year.strftime('%Y%m'))&.amount %>
+      <% payment_amount = @shabot_payments_by_month[record.month]&.map(&:total_amount)&.sum %>
+      <% sum_sales_amount += @facility.kwh_to_sales(record.mixed_kwh) || 0 %>
+      <% sum_receipts += receipt_amount || 0 %>
+      <% sum_payments += payment_amount || 0 %>
+      <% sum_prev_year_receipts += prev_year_receipt_amount || 0 %>
+      <tr>
+        <td><%= link_to month_date.strftime('%Y年%m月'), "/analysis/#{month_date.year}/#{month_date.month}/facilities/#{params[:facility_id]}" %></td>
+        <td class="right aligned"><%= @facility.kwh_to_sales(record.mixed_kwh).to_i.to_s(:delimited) %></td>
+        <td class="right aligned"><%= receipt_amount&.to_s(:delimited) %></td>
+        <td class="right aligned"><%= payment_amount&.to_s(:delimited) %></td>
+        <td class="right aligned">
+          <%= ((receipt_amount || 0) - (payment_amount || 0)).to_s(:delimited) %>
+        </td>
+        <td class="right aligned"><%= prev_year_receipt_amount&.to_s(:delimited) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr class="warning">
+      <td>合計</td>
+      <td class="right aligned"><%= sum_sales_amount.to_i.to_s(:delimited) %></td>
+      <td class="right aligned"><%= sum_receipts.to_s(:delimited) %></td>
+      <td class="right aligned"><%= sum_payments.to_s(:delimited) %></td>
+      <td class="right aligned"><%= (sum_receipts - sum_payments).to_s(:delimited) %></td>
+      <td class="right aligned"><%= sum_prev_year_receipts.to_s(:delimited) %></td>
+    </tr>
+  </tfoot>
+</table

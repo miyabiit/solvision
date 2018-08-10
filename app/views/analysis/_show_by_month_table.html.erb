@@ -1,0 +1,58 @@
+<table class="table ui">
+  <colgroup>
+    <col style="width: 120px">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>年月</th>
+      <th>日数</th>
+      <th>発電実績(kwh)</th>
+      <th>前月比(%)</th>
+      <th>前年比(%)</th>
+      <th>月間発電量予測(kwh)</th>
+      <th>近隣日射量(MJ/m2)</th>
+      <th>前年近隣日射量(MJ/m2)</th>
+      <th>日当り実績発電量(kwh/日)</th>
+      <th>日当りモジュールあたり実績発電量<br>(kwh/モジュール数・日)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @records.each do |record| %>
+      <% month_date = Date.strptime(record.month, '%Y%m') -%>
+      <tr>
+        <td><%= link_to month_date.strftime('%Y年%m月'), "/analysis/#{month_date.year}/#{month_date.month}/facilities/#{params[:facility_id]}" %></td>
+        <td class="right aligned"><%= month_date.end_of_month.day %></td>
+        <td class="right aligned">
+          <% if record.kwh %>
+            <%= record.mixed_kwh&.to_i&.to_s(:delimited) %>
+            <% if record.estimate_remains_kwh %>
+              <br>
+              (内予測: <%= record.estimate_remains_kwh&.to_i&.to_s(:delimited) %>)
+            <% end %>
+          <% end %>
+        </td>
+        <td class="right aligned"><%= record.prev_month_rate %></td>
+        <td class="right aligned"><%= record.prev_year_rate %></td>
+        <td class="right aligned"><%= record.estimate_kwh&.to_i&.to_s(:delimited) %></td>
+        <td class="right aligned"><%= record.neighbor_solar_radiation %></td>
+        <td class="right aligned"><%= record.prev_year_neighbor_solar_radiation %></td>
+        <td class="right aligned"><%= record.kwh_per_day&.to_i&.to_s(:delimited) %></td>
+        <td class="right aligned"><%= record.kwh_per_day_per_unit&.to_i&.to_s(:delimited) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr class="warning">
+      <td>合計</td>
+      <td></td>
+      <td class="right aligned"><%= @records.select(&:kwh).map(&:mixed_kwh).compact.sum.to_i.to_s(:delimited) %></td>
+      <td></td>
+      <td></td>
+      <td class="right aligned"><%= @records.map(&:estimate_kwh).compact.sum.to_i.to_s(:delimited) %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tfoot>
+</table>

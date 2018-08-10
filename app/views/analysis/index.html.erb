@@ -1,0 +1,36 @@
+<div class="pull-right">
+  <%= link_to '売電事業シミュレーションPDF', "/analysis/#{@year}/download.pdf", class: 'ui button primary' %>
+</div>
+
+<analysis-index :year="<%= @year %>"></analysis-index>
+
+<table class="table ui">
+  <thead>
+    <tr>
+      <th>発電施設</th>
+      <th>設備容量(kw)</th>
+      <th>発電量(kw)</th>
+      <th>売電金額(円)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @records.each do |record| %>
+      <tr>
+        <td><%= link_to record.facility.name, "/analysis/#{@year}/facilities/#{record.facility.id}" %></td>
+        <td><%= record.facility.last_capacity&.value %></td>
+        <td class="right aligned">
+          <% if record.kwh %>
+            <%= record.mixed_kwh&.to_i&.to_s(:delimited) %>
+            <% if record.estimate_remains_kwh && record.estimate_remains_kwh > 0 %>
+              <br>
+              (内予測: <%= record.estimate_remains_kwh&.to_i&.to_s(:delimited) %>)
+            <% end %>
+          <% end %>
+        </td>
+        <td class="right aligned">
+          <%= record.facility.kwh_to_sales(record.mixed_kwh).to_i.to_s(:delimited) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
