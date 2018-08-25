@@ -10,13 +10,6 @@ end
 %><% @backends.each do |server| %>
   <%= server %><% end %>
 }
-<% if fetch(:nginx_use_ssl) -%>
-server {
-  listen 8080;
-  server_name <%= fetch(:nginx_server_name) %>;
-  return 301 https://$host$1$request_uri;
-}
-<% end -%>
 
 server {
 <% if fetch(:nginx_use_ssl) -%>
@@ -33,7 +26,7 @@ server {
   ssl_certificate_key /etc/ssl/private/<%= fetch(:nginx_config_name) %>.key;
 <% end -%>
 <% else -%>
-  listen 8080;
+  listen <%= fetch(:nginx_server_http_port) %>;
 <% end -%>
   server_name <%= fetch(:nginx_server_name) %>;
   root <%= current_path %>/public;
@@ -56,12 +49,12 @@ server {
 <% else -%>
     proxy_set_header X-Forwarded-Proto http;
 <% end -%>
-    proxy_set_header X-Forwarded-Host $host:8080;
+    proxy_set_header X-Forwarded-Host $host:<%= fetch(:nginx_server_http_port) %>;
     proxy_pass http://puma_<%= fetch(:nginx_config_name) %>;
     # limit_req zone=one;
     access_log <%= shared_path %>/log/nginx.access.log;
     error_log <%= shared_path %>/log/nginx.error.log;
-    proxy_set_header X-Forwarded-Port 8080;
+    proxy_set_header X-Forwarded-Port <%= fetch(:nginx_server_http_port) %>;
   }
 
   location ^~ /assets/ {

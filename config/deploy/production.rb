@@ -7,7 +7,14 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-
+set :rails_env, "production"
+server 'solvision.shallontec.biz', user: 'ec2-user', roles: %w{web app db}
+set :nginx_server_name, 'solvision.shallontec.biz'
+# 設定ができてからtrueに
+set :nginx_use_ssl, false
+set :nginx_ssl_certificate, "/etc/letsencrypt/live/#{fetch(:nginx_server_name)}/fullchain.pem"
+set :nginx_ssl_certificate_key, "/etc/letsencrypt/live/#{fetch(:nginx_server_name)}/privkey.pem"
+set :nginx_server_http_port, 80
 
 # role-based syntax
 # ==================
@@ -21,7 +28,9 @@
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-
+role :app, %w{ec2-user@solvision.shallontec.biz}
+role :web, %w{ec2-user@solvision.shallontec.biz}
+role :db, %w{ec2-user@solvision.shallontec.biz}
 
 # Configuration
 # =============

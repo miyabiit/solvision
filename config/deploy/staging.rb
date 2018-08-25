@@ -10,6 +10,7 @@
 set :rails_env, "staging"
 server ENV['STAGING_SERVER_IP'], user: 'ec2-user', roles: %w{web app db}
 set :nginx_use_ssl, false
+set :nginx_server_http_port, 8080
 
 # role-based syntax
 # ==================
