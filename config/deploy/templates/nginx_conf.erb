@@ -11,6 +11,14 @@ end
   <%= server %><% end %>
 }
 
+<% if fetch(:nginx_use_ssl) -%>
+server {
+  listen <%= fetch(:nginx_server_http_port) %>;
+  server_name <%= fetch(:nginx_server_name) %>;
+  return 301 https://$host$1$request_uri;
+}
+<% end -%>
+
 server {
 <% if fetch(:nginx_use_ssl) -%>
   listen 443;
