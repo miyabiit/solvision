@@ -11,8 +11,8 @@ set :rails_env, "production"
 server 'solvision.shallontec.biz', user: 'ec2-user', roles: %w{web app db}
 set :nginx_server_name, 'solvision.shallontec.biz'
 set :nginx_use_ssl, true
-set :nginx_ssl_certificate, "/etc/letsencrypt/live/#{fetch(:nginx_server_name)}/fullchain.pem"
-set :nginx_ssl_certificate_key, "/etc/letsencrypt/live/#{fetch(:nginx_server_name)}/privkey.pem"
+set :nginx_ssl_certificate, "/etc/letsencrypt/live/solar.shallontec.biz/fullchain.pem"
+set :nginx_ssl_certificate_key, "/etc/letsencrypt/live/solar.shallontec.biz/privkey.pem"
 set :nginx_server_http_port, 80
 
 # role-based syntax
