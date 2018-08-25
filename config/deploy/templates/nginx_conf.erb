@@ -56,13 +56,13 @@ server {
     proxy_set_header X-Forwarded-Proto https;
 <% else -%>
     proxy_set_header X-Forwarded-Proto http;
-<% end -%>
+    proxy_set_header X-Forwarded-Port <%= fetch(:nginx_server_http_port) %>;
     proxy_set_header X-Forwarded-Host $host:<%= fetch(:nginx_server_http_port) %>;
+<% end -%>
     proxy_pass http://puma_<%= fetch(:nginx_config_name) %>;
     # limit_req zone=one;
     access_log <%= shared_path %>/log/nginx.access.log;
     error_log <%= shared_path %>/log/nginx.error.log;
-    proxy_set_header X-Forwarded-Port <%= fetch(:nginx_server_http_port) %>;
   }
 
   location ^~ /assets/ {
