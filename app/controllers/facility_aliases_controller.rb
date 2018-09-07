@@ -17,7 +17,7 @@ class FacilityAliasesController < ApplicationController
   private
 
     def set_facility_alias
-      @facility = Facility.find(params[:facility_id]
+      @facility = Facility.find(params[:facility_id])
       @facility_alias = FacilityAlias.find(params[:id])
     end
 
