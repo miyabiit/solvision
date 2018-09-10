@@ -61,7 +61,7 @@ class AnalysisController < ApplicationController
     @records.each do |record|
       record.estimate_kwh = estimate_kwh_per_day
     end
-    fetch_shabot_receipt
+    fetch_shabot_payment(fromym: @target_date.strftime('%Y%m'), toym: @target_date.strftime('%Y%m'))
     render 'show_by_day'
   end
 
@@ -108,17 +108,17 @@ class AnalysisController < ApplicationController
      
     @records = monthly_solars.select { |ms| (from_month .. to_month).include?(ms.month) }
 
-    fetch_shabot_payment(from_month, to_month)
+    fetch_shabot_payment(fromym: from_month, toym: to_month, planned: false)
+    @shabot_payments_by_month = @shabot_payments.group_by {|p| p.payment_date.strftime('%Y%m') }
 
     render 'show_by_month'
   end
 
-  def fetch_shabot_payment(from_month, to_month)
+  def fetch_shabot_payment(q)
     @shabot_payments = []
     @facility.facility_projects.each do |project|
-      @shabot_payments += ShabotPayment.where(fromym: from_month, toym: to_month, planned: false, project_name: project.shabot_project_name, project_category: project.shabot_project_category)
+      @shabot_payments += ShabotPayment.where(q.merge({project_name: project.shabot_project_name, project_category: project.shabot_project_category}))
     end
-    @shabot_payments_by_month = @shabot_payments.group_by {|p| p.payment_date.strftime('%Y%m') }
   end
 
   def setup_index
