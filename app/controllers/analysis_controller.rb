@@ -57,7 +57,7 @@ class AnalysisController < ApplicationController
     end
     monthly_solar = MonthlySolar.new(facility: @facility, month: @target_date.strftime('%Y%m'))
     monthly_solar.calculate(nil, prev_year_monthly_solar, 0)
-    estimate_kwh_per_day = monthly_solar.estimate_kwh / @target_date.end_of_month.day
+    estimate_kwh_per_day = (monthly_solar.estimate_kwh || 0) / @target_date.end_of_month.day
     @records.each do |record|
       record.estimate_kwh = estimate_kwh_per_day
     end
