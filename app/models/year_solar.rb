@@ -22,12 +22,9 @@ class YearSolar
     ((1..12).to_a - months).each do |remains_month|
       target_date = Date.new(year_date.year, remains_month, 1)
       prev_year = target_date.prev_year.strftime('%Y%m')
+      prev_year_monthly_solar = prev_year_monthly_solars.find {|ms| ms.month == prev_year }
       ms = MonthlySolar.new(facility: facility, month: target_date.strftime('%Y%m'))
-      ms.calculate(
-        nil,
-        prev_year_monthly_solars.find {|ms2| ms2.month == prev_year },
-        0
-      )
+      ms.calculate(nil, prev_year_monthly_solar, 0)
       self.mixed_monthly_solars << ms
     end
     self.mixed_monthly_solars.sort_by!(&:month)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_04_133256) do
+ActiveRecord::Schema.define(version: 2018_09_25_103513) do
 
   create_table "daily_solars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "facility_id", null: false
@@ -24,11 +24,16 @@ ActiveRecord::Schema.define(version: 2018_09_04_133256) do
 
   create_table "facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.string "geocode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sales_type", default: 0, null: false
     t.integer "unit_price", default: 0, null: false
+    t.decimal "latitude", precision: 12, scale: 8
+    t.decimal "longitude", precision: 12, scale: 8
+    t.bigint "jma_place_id"
+    t.bigint "nedo_place_id"
+    t.index ["jma_place_id"], name: "index_facilities_on_jma_place_id"
+    t.index ["nedo_place_id"], name: "index_facilities_on_nedo_place_id"
   end
 
   create_table "facility_aliases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -60,6 +65,30 @@ ActiveRecord::Schema.define(version: 2018_09_04_133256) do
     t.index ["facility_id"], name: "index_facility_projects_on_facility_id"
   end
 
+  create_table "jma_daily_solar_radiations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "jma_place_id", null: false
+    t.date "date", null: false
+    t.decimal "value", precision: 8, scale: 2
+    t.index ["jma_place_id"], name: "index_jma_daily_solar_radiations_on_jma_place_id"
+  end
+
+  create_table "jma_monthly_solar_radiations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "jma_place_id", null: false
+    t.string "year_month", null: false
+    t.decimal "average_value", precision: 8, scale: 2
+    t.index ["jma_place_id"], name: "index_jma_monthly_solar_radiations_on_jma_place_id"
+  end
+
+  create_table "jma_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address"
+    t.decimal "latitude", precision: 12, scale: 8, null: false
+    t.decimal "longitude", precision: 12, scale: 8, null: false
+    t.integer "number"
+    t.integer "prec_no"
+    t.integer "block_no"
+  end
+
   create_table "monthly_receipts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "facility_id", null: false
     t.string "year_month", null: false
@@ -80,12 +109,28 @@ ActiveRecord::Schema.define(version: 2018_09_04_133256) do
     t.float "prev_year_rate"
     t.decimal "estimate_remains_kwh", precision: 16, scale: 4
     t.decimal "estimate_kwh", precision: 16, scale: 4
-    t.float "neighbor_solar_radiation"
-    t.float "prev_year_neighbor_solar_radiation"
+    t.float "prev_year_solar_radiation"
     t.float "kwh_per_day"
     t.float "kwh_per_day_per_unit"
     t.decimal "mixed_kwh", precision: 16, scale: 4
     t.index ["facility_id"], name: "index_monthly_solars_on_facility_id"
+  end
+
+  create_table "nedo_places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "number"
+    t.string "name", null: false
+    t.decimal "latitude", precision: 12, scale: 8, null: false
+    t.decimal "longitude", precision: 12, scale: 8, null: false
+    t.decimal "elevation", precision: 8, scale: 2
+  end
+
+  create_table "nedo_solar_radiations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "nedo_place_id", null: false
+    t.integer "month", null: false
+    t.decimal "average_value", precision: 6, scale: 2, null: false
+    t.decimal "minimum_value", precision: 6, scale: 2, null: false
+    t.decimal "maximum_value", precision: 6, scale: 2, null: false
+    t.index ["nedo_place_id"], name: "index_nedo_solar_radiations_on_nedo_place_id"
   end
 
   create_table "receipts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -116,10 +161,15 @@ ActiveRecord::Schema.define(version: 2018_09_04_133256) do
   end
 
   add_foreign_key "daily_solars", "facilities"
+  add_foreign_key "facilities", "jma_places"
+  add_foreign_key "facilities", "nedo_places"
   add_foreign_key "facility_aliases", "facilities"
   add_foreign_key "facility_capacities", "facilities"
   add_foreign_key "facility_projects", "facilities"
+  add_foreign_key "jma_daily_solar_radiations", "jma_places"
+  add_foreign_key "jma_monthly_solar_radiations", "jma_places"
   add_foreign_key "monthly_receipts", "facilities"
   add_foreign_key "monthly_solars", "facilities"
+  add_foreign_key "nedo_solar_radiations", "nedo_places"
   add_foreign_key "receipts", "monthly_receipts"
 end

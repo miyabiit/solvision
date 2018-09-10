@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   end
   resources :facilities do
     resources :facility_aliases
+    member do
+      get :set_nearest
+    end
   end
   resources :facility_capacities
   resources :analysis, only: [:index] do

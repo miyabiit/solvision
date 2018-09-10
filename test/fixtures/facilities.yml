@@ -2,8 +2,6 @@
 
 one:
   name: MyString
-  geocode: MyString
 
 two:
   name: MyString
-  geocode: MyString

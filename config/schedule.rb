@@ -24,4 +24,8 @@ every :day, at: "4:00 am" do
   runner "FetchSolarsJob.perform_now"
 end
 
+every :day, at: "1:00 pm" do
+  runner "FetchJmaDataJob.perform_now"
+end
+
 # Learn more: http://github.com/javan/whenever

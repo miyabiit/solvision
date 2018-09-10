@@ -14,7 +14,6 @@ class FacilitiesTest < ApplicationSystemTestCase
     visit facilities_url
     click_on "New Facility"
 
-    fill_in "Geocode", with: @facility.geocode
     fill_in "Name", with: @facility.name
     click_on "Create Facility"
 
@@ -26,7 +25,6 @@ class FacilitiesTest < ApplicationSystemTestCase
     visit facilities_url
     click_on "Edit", match: :first
 
-    fill_in "Geocode", with: @facility.geocode
     fill_in "Name", with: @facility.name
     click_on "Update Facility"
 
