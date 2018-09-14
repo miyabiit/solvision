@@ -32,25 +32,25 @@ class MonthlySolar < ApplicationRecord
           prev_year_last_capacity = last_capacity
         end
         if prev_year_last_capacity.value > 0
-          self.estimate_kwh = (prev_year_data.kwh.to_f * last_capacity.value / prev_year_last_capacity.value * DEGRADE_RATE).round(1)
+          self.estimate_kwh = (prev_year_data.kwh.to_f * last_capacity.value / prev_year_last_capacity.value * DEGRADE_RATE)
         end
       end
     end
-    self.kwh_per_day = (kwh.to_f / days).round(1) if days > 0
-    self.kwh_per_day_per_unit = (kwh_per_day / last_capacity.unit_count).round(1) if kwh_per_day && last_capacity&.unit_count && last_capacity.unit_count > 0
+    self.kwh_per_day = (kwh.to_f / days) if days > 0
+    self.kwh_per_day_per_unit = (kwh_per_day / last_capacity.value) if kwh_per_day && last_capacity&.value && last_capacity.value > 0
     if remains_days > 0 && days > 0
       if estimate_kwh && estimate_kwh > 0
         # TODO: NEDO 予測から推定
-        self.estimate_remains_kwh = (estimate_kwh / month_days * remains_days).round(1)
+        self.estimate_remains_kwh = (estimate_kwh / month_days * remains_days)
       end
     end
     self.mixed_kwh = (kwh || 0) + (estimate_remains_kwh || 0)
     if mixed_kwh > 0
       if prev_month_data&.kwh && prev_month_data.kwh > 0
-        self.prev_month_rate = (mixed_kwh.to_f / (prev_month_data.mixed_kwh || prev_month_data.kwh) * 100).round(1)
+        self.prev_month_rate = (mixed_kwh.to_f / (prev_month_data.mixed_kwh || prev_month_data.kwh) * 100)
       end
       if prev_year_data&.kwh && prev_year_data.kwh > 0
-        self.prev_year_rate = (mixed_kwh.to_f / (prev_year_data.mixed_kwh || prev_year_data.kwh) * 100).round(1)
+        self.prev_year_rate = (mixed_kwh.to_f / (prev_year_data.mixed_kwh || prev_year_data.kwh) * 100)
       end
     end
   end
