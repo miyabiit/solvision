@@ -1,0 +1,40 @@
+<table class="table ui">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>発電量(kwh)</th>
+      <th>近隣日射量(MJ/m2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @records.each do |record| %>
+      <tr>
+        <td><%= record.date.day %>日</td>
+        <td class="right aligned"><%= record.kwh&.to_i&.to_s(:delimited) %></td>
+        <td class="right aligned"></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr class="warning">
+      <td>合計</td>
+      <td class="right aligned"><%= @records.map(&:kwh).compact.sum.to_i.to_s(:delimited) %></td>
+      <td></td>
+    </tr>
+    <tr class="warning">
+      <td>平均</td>
+      <td class="right aligned"><%= (@records.map(&:kwh).compact.sum.to_f / @records.size).to_i.to_s(:delimited) %></td>
+      <td></td>
+    </tr>
+    <tr class="warning">
+      <td>最小値</td>
+      <td class="right aligned"><%= @records.map(&:kwh).compact.min.to_i.to_s(:delimited) %></td>
+      <td></td>
+    </tr>
+    <tr class="warning">
+      <td>最大値</td>
+      <td class="right aligned"><%= @records.map(&:kwh).compact.max.to_i.to_s(:delimited) %></td>
+      <td></td>
+    </tr>
+  </tfoot>
+</table>

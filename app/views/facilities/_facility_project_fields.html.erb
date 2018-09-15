@@ -1,0 +1,13 @@
+<div class="nested-fields">
+  <div class="two fields">
+    <div class="field">
+      <%= f.text_field :shabot_project_name, placeholder: 'Shabot事業名' %>
+    </div>
+    <div class="field">
+      <%= f.text_field :shabot_project_category, placeholder: 'Shabotプロジェクト名' %>
+    </div>
+    <div class="field">
+      <%= link_to_remove_association "削除", f, class: 'ui red button' %>
+    </div>
+  </div>
+</div>

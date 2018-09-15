@@ -1,6 +1,7 @@
 class FacilitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_facility, only: [:show, :edit, :update, :destroy]
+  before_action :fetch_solar_facilities, only: [:new, :edit, :create, :update]
 
   # GET /facilities
   # GET /facilities.json
@@ -27,6 +28,7 @@ class FacilitiesController < ApplicationController
   # POST /facilities.json
   def create
     @facility = Facility.new(facility_params)
+    @facility.solar_facilities = @solar_facilities
 
     respond_to do |format|
       if @facility.save
@@ -42,6 +44,7 @@ class FacilitiesController < ApplicationController
   # PATCH/PUT /facilities/1
   # PATCH/PUT /facilities/1.json
   def update
+    @facility.solar_facilities = @solar_facilities
     respond_to do |format|
       if @facility.update(facility_params)
         format.html { redirect_to facilities_url, notice: '発電施設情報を更新しました' }
@@ -72,6 +75,14 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:name, :geocode, :sales_type, :capacity_value, :capacity_date)
+      params.require(:facility).permit(
+        :name, :geocode, :sales_type, :unit_price, :capacity_value, :capacity_date, :capacity_unit_count,
+        facility_aliases_attributes: [:id, :solar_facility_id, :solar_facility_name, :_destroy],
+        facility_projects_attributes: [:id, :shabot_project_name, :shabot_project_category, :_destroy]
+      )
+    end
+
+    def fetch_solar_facilities
+      @solar_facilities = SolarFacility.all
     end
 end

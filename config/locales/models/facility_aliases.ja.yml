@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      facility_alias: 'Solars発電施設'
+    attributes:
+      facility_alias:
+        solar_facility_id: 'Solars発電施設データ連携対象'

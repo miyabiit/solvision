@@ -1,0 +1,27 @@
+<%= link_to '戻る', '/analysis', class: 'ui button' %>
+<br>
+<br>
+
+<project-graph :x-axis-type="'month'" :records='<%= raw render('show_by_month_records.json').to_json %>'></project-graph>
+
+<table  class="ui table" style="width: 420px !important">
+  <thead>
+    <tr>
+      <th>対象年</th>
+      <th>発電所</th>
+      <th>設備容量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @year %>年</td>
+      <td><%= @facility.name %></td>
+      <td><%= @facility.last_capacity&.value&.to_s(:delimited) %>kw</td>
+    </tr>
+  </tbody>
+</table>
+
+<%= render 'show_by_month_table' %>
+
+<%= render 'show_by_month_sales_table' %>
+

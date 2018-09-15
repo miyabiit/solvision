@@ -1,0 +1,10 @@
+<div class="nested-fields">
+  <div class="two fields">
+    <div class="field">
+      <%= f.select :solar_facility_id, @solar_facilities.map(&:attributes_for_option), {}, class: 'ui fluid dropdown' %>
+    </div>
+    <div class="field">
+      <%= link_to_remove_association "削除", f, class: 'ui red button' %>
+    </div>
+  </div>
+</div>

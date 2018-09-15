@@ -8,7 +8,9 @@ ja:
         geocode: 'ジオコード'
         capacity_value: '設備容量(kW)'
         capacity_date: '設備容量変更日'
+        capacity_unit_count: 'ユニット数'
         sales_type: '買取種別'
+        unit_price: '単価(円/kwh)'
   enumerize:
     facility:
       sales_type:

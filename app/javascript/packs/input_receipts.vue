@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <table class="ui celled structured table">
+    <table class="ui celled structured table" style="width: 80% !important">
       <thead>
         <tr>
           <th>発電施設</th>

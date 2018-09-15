@@ -1,11 +1,12 @@
 <h1><%= Facility.model_name.human %></h1>
 
-<table class="ui table well-width">
+<table class="ui table well-width" style="width: 80% !important">
   <thead>
     <tr>
       <th><%= Facility.human_attribute_name :name %></th>
       <th><%= Facility.human_attribute_name :geocode %></th>
       <th><%= Facility.human_attribute_name :capacity_value %></th>
+      <th><%= Facility.human_attribute_name :unit_price %></th>
       <th><%= Facility.human_attribute_name :sales_type %></th>
       <th colspan="3">操作</th>
     </tr>
@@ -16,7 +17,8 @@
       <tr>
         <td><%= facility.name %></td>
         <td><%= facility.geocode %></td>
-        <td><%= facility.capacity_value %></td>
+        <td class="right aligned"><%= facility.capacity_value&.to_s(:delimited) %></td>
+        <td class="right aligned"><%= facility.unit_price  %></td>
         <td><%= facility.sales_type_text %></td>
         <td><%= link_to '編集', edit_facility_path(facility) %></td>
       </tr>

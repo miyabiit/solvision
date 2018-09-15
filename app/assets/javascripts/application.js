@@ -15,4 +15,5 @@
 //= require activestorage
 //= require semantic-ui-css/semantic
 //= require csrf_token
+//= require cocoon
 //= require_tree .

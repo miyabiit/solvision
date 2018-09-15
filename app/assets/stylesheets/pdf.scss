@@ -1,0 +1,22 @@
+#content {
+}
+
+table {
+  font-size: 12px;
+  border-collapse: collapse;
+  page-break-inside: auto;
+  thead {
+    display: table-row-group;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+    .page-break{
+      page-break-after: always;
+    }
+    td, th {
+      border: 1px solid;
+      padding: 4px;
+    }
+  }
+}

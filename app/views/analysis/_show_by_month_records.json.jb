@@ -1,0 +1,21 @@
+sum_kwh = 0
+sum_kwh_estimate = 0
+@records.map {|record|
+  sum_kwh += if record.kwh
+               record.mixed_kwh || 0
+             else
+               record.estimate_kwh || 0
+             end
+  sum_kwh_estimate += if record.estimate_kwh && record.estimate_kwh > 0
+                        record.estimate_kwh || 0 
+                      else
+                        record.mixed_kwh || 0
+                      end
+  {
+    yearMonth: Date.strptime(record.month, '%Y%m'),
+    sumKwh: sum_kwh,
+    sumKwhEstimate: sum_kwh_estimate,
+    kwh: record.mixed_kwh,
+    kwhEstimate: record.estimate_kwh
+  }
+}

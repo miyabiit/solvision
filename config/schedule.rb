@@ -20,8 +20,8 @@
 env :DISABLE_SPRING, "1"
 set :output, 'log/crontab.log'
 
-# every 1.minutes do
-#   runner "CameraImageCollectRunner.run"
-# end
+every :day, at: "4:00 am" do
+  runner "FetchSolarsJob.perform_now"
+end
 
 # Learn more: http://github.com/javan/whenever
