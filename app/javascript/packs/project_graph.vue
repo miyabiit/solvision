@@ -41,12 +41,20 @@ export default {
         },
         axis: {
           y: {
+            label: {
+              text: 'kwh',
+              position: 'outer-top'
+            },
             tick: {
               format: d3.format(',')
             }
           },
           y2: {
             show: true,
+            label: {
+              text: 'kwh(累積)',
+              position: 'outer-top'
+            },
             tick: {
               format: d3.format(',')
             }
