@@ -50,7 +50,7 @@
         <% end %>
         <td align="right"><%= delimited_int(year_sum_sales / 1000) %></td>
         <% (1..4).each do |i| %>
-          <td align="right"><%= delimited_int (year_sum_sales * (MonthlySolar::DEGRADE_RATE ** i) ) %></td>
+          <td align="right"><%= delimited_int (year_sum_sales * (MonthlySolar::DEGRADE_RATE ** i) / 1000) %></td>
         <% end %>
       </tr>
     <% end %>
