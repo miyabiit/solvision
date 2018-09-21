@@ -27,7 +27,7 @@
             <%= record.mixed_kwh&.to_i&.to_s(:delimited) %>
             <% if record.estimate_remains_kwh %>
               <br>
-              (内予測: <%= record.estimate_remains_kwh&.to_i&.to_s(:delimited) %>)
+              (含予測値: <%= record.estimate_remains_kwh&.to_i&.to_s(:delimited) %>)
             <% end %>
           <% end %>
         </td>
