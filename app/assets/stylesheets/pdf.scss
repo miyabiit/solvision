@@ -19,4 +19,21 @@ table {
       padding: 4px;
     }
   }
+
+  .collapsed-top-td {
+    border-bottom: 0px;
+  }
+
+  .collapsed-top-row {
+    border-bottom: 0px;
+    td, th {
+      border-bottom: 0px;
+    }
+  }
+  .collapsed-bottom-row {
+    border-top: 0px;
+    td, th {
+      border-top: 0px;
+    }
+  }
 }

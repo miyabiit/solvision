@@ -6,12 +6,12 @@
       <th rowspan="2">設備容量</th>
       <th rowspan="2">プレミアム<br>買取</th>
       <th rowspan="2"></th>
-      <th colspan="12"><%= @year %>年度</th>
-      <th rowspan="2"><%= @year %>年度<br>合計</th>
-      <th rowspan="2"><%= @year + 1 %>年度<br>合計</th>
-      <th rowspan="2"><%= @year + 2 %>年度<br>合計</th>
-      <th rowspan="2"><%= @year + 3 %>年度<br>合計</th>
-      <th rowspan="2"><%= @year + 4 %>年度<br>合計</th>
+      <th colspan="12"><%= @year %>年</th>
+      <th rowspan="2"><%= @year %>年<br>合計</th>
+      <th rowspan="2"><%= @year + 1 %>年<br>合計</th>
+      <th rowspan="2"><%= @year + 2 %>年<br>合計</th>
+      <th rowspan="2"><%= @year + 3 %>年<br>合計</th>
+      <th rowspan="2"><%= @year + 4 %>年<br>合計</th>
     </tr>
     <tr>
       <% (1..12).each do |month| %>
@@ -28,7 +28,7 @@
       <% year_sum_sales = record.facility.kwh_to_sales(year_sum_kwh) %>
       <% facility_kw = record.facility.last_capacity&.value %>
       <% sum_facility_kw += facility_kw  %>
-      <tr>
+      <tr class="collapsed-top-row">
         <td rowspan="2"><%= record.facility.name %></td>
         <td align="right" rowspan="2"><%= delimited_int facility_kw %> kw</td>
         <td align="center" rowspan="2"><%= '有' if record.facility.sales_type.premium?%></td>
@@ -42,7 +42,7 @@
           <td align="right"><%= delimited_int (year_sum_kwh * (MonthlySolar::DEGRADE_RATE ** i) ) %></td>
         <% end %>
       </tr>
-      <tr>
+      <tr class="collapsed-bottom-row">
         <td>売電金額(千円)</td>
         <% record.mixed_monthly_solars.each_with_index do |solar, idx| %>
           <% sum_sales_records[idx] += record.facility.kwh_to_sales(solar.mixed_kwh) %>
@@ -58,17 +58,17 @@
       <td rowspan="2">合計</td>
       <td rowspan="2" align="right"><%= delimited_int sum_facility_kw %> kw</td>
       <td rowspan="2"></td>
-      <td>発電実績(kwh)</td>
+      <td class="collapsed-top-td">発電実績(kwh)</td>
       <% sum_kwh_records.each do |kwh| %>
-        <td align="right"><%= delimited_int kwh %></td>
+        <td class="collapsed-top-td" align="right"><%= delimited_int kwh %></td>
       <% end %>
       <% sum_kwh_records_sum = sum_kwh_records.sum %>
-      <td align="right"><%= delimited_int sum_kwh_records_sum %></td>
+      <td class="collapsed-top-td" align="right"><%= delimited_int sum_kwh_records_sum %></td>
       <% (1..4).each do |i| %>
-        <td align="right"><%= delimited_int (sum_kwh_records_sum * (MonthlySolar::DEGRADE_RATE ** i) ) %></td>
+        <td class="collapsed-top-td" align="right"><%= delimited_int (sum_kwh_records_sum * (MonthlySolar::DEGRADE_RATE ** i) ) %></td>
       <% end %>
     </tr>
-    <tr>
+    <tr class="collapsed-bottom-row">
       <td>売電金額(千円)</td>
       <% sum_sales_records.each do |sales| %>
         <td align="right"><%= delimited_int(sales/1000)%></td>
