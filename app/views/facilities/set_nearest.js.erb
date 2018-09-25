@@ -1,4 +1,6 @@
 <% if @jma_place && @nedo_place %>
   $('#facility_jma_place_id').val('<%= @jma_place.id %>')
   $('#facility_nedo_place_id').val('<%= @nedo_place.id %>')
+<% else %>
+  vbus.$emit('show-message-bar', '緯度と経度を設定＆更新後に再度実行してください')
 <% end %>
