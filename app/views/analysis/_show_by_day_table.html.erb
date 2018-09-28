@@ -11,7 +11,7 @@
       <tr>
         <td><%= record.date.day %>日</td>
         <td class="right aligned"><%= record.kwh&.to_i&.to_s(:delimited) %></td>
-        <td class="right aligned"></td>
+        <td class="right aligned"><%= record.solar_radiation %></td>
       </tr>
     <% end %>
   </tbody>
@@ -19,22 +19,22 @@
     <tr class="warning">
       <td>合計</td>
       <td class="right aligned"><%= @records.map(&:kwh).compact.sum.to_i.to_s(:delimited) %></td>
-      <td></td>
+      <td class="right aligned"><%= @records.map(&:solar_radiation).compact.sum %></td>
     </tr>
     <tr class="warning">
       <td>平均</td>
-      <td class="right aligned"><%= (@records.map(&:kwh).compact.sum.to_f / @records.size).to_i.to_s(:delimited) %></td>
-      <td></td>
+      <td class="right aligned"><%= (@records.map(&:kwh).compact.sum.to_f / @records.size).to_i.to_s(:delimited)  if @records.present? %></td>
+      <td class="right aligned"><%= (@records.map(&:solar_radiation).compact.sum / @records.size).round(2) if @records.present? %></td>
     </tr>
     <tr class="warning">
       <td>最小値</td>
-      <td class="right aligned"><%= @records.map(&:kwh).compact.min.to_i.to_s(:delimited) %></td>
-      <td></td>
+      <td class="right aligned"><%= @records.map(&:kwh).compact.min.to_i.to_s(:delimited) if @records.present? %></td>
+      <td class="right aligned"><%= @records.map(&:solar_radiation).compact.min if @records.present? %></td>
     </tr>
     <tr class="warning">
       <td>最大値</td>
-      <td class="right aligned"><%= @records.map(&:kwh).compact.max.to_i.to_s(:delimited) %></td>
-      <td></td>
+      <td class="right aligned"><%= @records.map(&:kwh).compact.max.to_i.to_s(:delimited) if @records.present? %></td>
+      <td class="right aligned"><%= @records.map(&:solar_radiation).compact.max if @records.present? %></td>
     </tr>
   </tfoot>
 </table>

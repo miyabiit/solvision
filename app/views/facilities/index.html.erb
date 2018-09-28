@@ -4,7 +4,8 @@
   <thead>
     <tr>
       <th><%= Facility.human_attribute_name :name %></th>
-      <th><%= Facility.human_attribute_name :geocode %></th>
+      <th><%= Facility.human_attribute_name :latitude %></th>
+      <th><%= Facility.human_attribute_name :longitude %></th>
       <th><%= Facility.human_attribute_name :capacity_value %></th>
       <th><%= Facility.human_attribute_name :unit_price %></th>
       <th><%= Facility.human_attribute_name :sales_type %></th>
@@ -16,7 +17,8 @@
     <% @facilities.each do |facility| %>
       <tr>
         <td><%= facility.name %></td>
-        <td><%= facility.geocode %></td>
+        <td><%= facility.latitude %></td>
+        <td><%= facility.longitude %></td>
         <td class="right aligned"><%= facility.capacity_value&.to_s(:delimited) %></td>
         <td class="right aligned"><%= facility.unit_price  %></td>
         <td><%= facility.sales_type_text %></td>

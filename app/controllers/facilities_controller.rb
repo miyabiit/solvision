@@ -1,6 +1,6 @@
 class FacilitiesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_facility, only: [:show, :edit, :update, :destroy]
+  before_action :set_facility, only: [:show, :edit, :update, :destroy, :set_nearest]
   before_action :fetch_solar_facilities, only: [:new, :edit, :create, :update]
 
   # GET /facilities
@@ -66,6 +66,13 @@ class FacilitiesController < ApplicationController
     end
   end
 
+  def set_nearest
+    if @facility.latitude.present? && @facility.longitude.present?
+      @jma_place = JmaPlace.nearest(@facility.latitude, @facility.longitude)
+      @nedo_place = NedoPlace.nearest(@facility.latitude, @facility.longitude)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_facility
@@ -76,7 +83,9 @@ class FacilitiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
       params.require(:facility).permit(
-        :name, :geocode, :sales_type, :unit_price, :capacity_value, :capacity_date, :capacity_unit_count,
+        :name, :latitude, :longitude, :sales_type, :unit_price, 
+        :jma_place_id, :nedo_place_id,
+        :capacity_value, :capacity_date, :capacity_unit_count,
         facility_aliases_attributes: [:id, :solar_facility_id, :solar_facility_name, :_destroy],
         facility_projects_attributes: [:id, :shabot_project_name, :shabot_project_category, :_destroy]
       )

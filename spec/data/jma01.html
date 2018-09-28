@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>気象庁｜過去の気象データ検索</title>
+<meta name="Author" content="気象庁 Japan Meteorological Agency" />
+<meta name="keywords" content="気象庁 Japan Meteorological Agency" />
+<meta name="description" content="気象庁｜過去の気象データ検索" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" type="text/css" href="../../../../com/css/define.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../css/default.css" media="all" />
+<script language="JavaScript" type="text/JavaScript" src="../js/jquery.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="../js/jquery.tablefix.js"></script>
+<style type="text/css" media="all"><!-- @import url(../../../../com/default.css); --></style>
+<link rel="stylesheet" type="text/css" href="../../css/kako.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../css/print.css" media="print" />
+</head>
+
+<body>
+<noscript><div>すべての機能をご利用いただくにはJavascriptを有効にしてください。</div></noscript>
+<!--header start -->
+<div id="header_area">
+  <div id="nheader">
+  <div id="logo"><a href="//www.jma.go.jp/jma/index.html"><img src="//www.jma.go.jp/jma/com/images/logo.gif" alt="気象庁" width="120" height="67" /></a></div>
+
+  <div id="header_right">
+  <div id="header_link">
+  <ul>
+  <li id="toMain"><a href="#main">本文へ</a></li>
+  <li xml:lang="en" lang="en"><a href="//www.jma.go.jp/jma/indexe.html">ENGLISH</a></li>
+  <li><a href="//www.jma.go.jp/jma/kishou/info/goiken.html">ご意見･ご感想</a></li>
+  <li id="siteMap"><a href="//www.jma.go.jp/jma/kishou/sitemap.html">サイトマップ</a></li>
+  </ul>
+  </div>
+  <!-- search -->
+  <div id="yjsearch" class="watermark">
+  <p>キーワードを入力し検索ボタンを押下ください。</p>
+  <form action="//www.jma.go.jp/jma/menu/search.html" method="get" id="srch">
+  <input type="search" results="5" name="p" id="srchInput" />
+  <input type="image" src="//www.jma.go.jp/jma/com/images/btn_search.gif" alt="検索" id="srchBtn" onclick="document.getElementById('srchInput').focus();" />
+  <input type="hidden" id="fr" name="fr" value="cse" />
+  <input type="hidden" id="ei" name="ei" value="utf-8" />
+  <input type="hidden" id="csid" name="csid" value="pD.LqPJKNL6pX5S8V0Zj684fKOuX.849vg9h" />
+  <input type="hidden" name="vs" value="www.jma.go.jp" id="yjInsite" />
+  </form>
+  <img src="//custom.search.yahoo.co.jp/images/window/pD.LqPJKNL6pX5S8V0Zj684fKOuX.849vg9h.gif" alt="" /> </div>
+  <script type="text/javascript">
+  (function() {
+    var sb = document.getElementById('yjsearch');
+    if (sb && sb.className == 'watermark') {
+      var si = document.getElementById('srchInput');
+      var f = function() { si.className = 'nomark'; };
+      var b = function() {
+        if (si.value == '') {
+          si.className = '';
+        }
+      };
+      si.onfocus = f;
+      si.onblur = b;
+      if (!/[&?]p=[^&]/.test(location.search)) {
+        b();
+      } else {
+        f();
+      }
+    }
+  })();
+</script>
+<!-- search -->
+</div>
+<ul id="gnavi">
+  <li><a href="//www.jma.go.jp/">ホーム</a></li>
+  <li><a href="//www.jma.go.jp/jma/menu/menuflash.html">防災情報</a></li>
+  <li><a href="//www.jma.go.jp/jma/menu/menureport.html" class="on">各種データ・資料</a></li>
+  <li><a href="//www.jma.go.jp/jma/menu/menuknowledge.html">知識・解説</a></li>
+  <li><a href="//www.jma.go.jp/jma/menu/menuabout.html">気象庁について</a></li>
+  <li><a href="//www.jma.go.jp/jma/menu/menulinks.html">案内・申請</a></li>
+  </ul>
+  </div>
+</div>
+<!--header end -->
+
+<div id="contents_area3">
+  <div id="ncontents2">
+<!-- pankuzu menu -->
+<div class="print">
+  <ul class="breadcrumb2">
+  <li><a href="//www.jma.go.jp/">ホーム</a>&nbsp;&gt;&nbsp;</li>
+  <li><a href="//www.jma.go.jp/jma/menu/menureport.html">各種データ・資料</a>&nbsp;&gt;&nbsp;</li>
+  <li><a href="../index.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a3">過去の気象データ検索</a>&nbsp;&gt;&nbsp;</li>
+  <li>日ごとの値</li>
+  </ul></div>
+<!-- //pankuzu menu -->
+
+<div id="main">
+<!-- contents -->
+<h1 class="print">日ごとの値</h1>
+
+<div class="print"><table style="float:left"><tr><td><img src="../../data/icon/sellected/table.gif" alt="一覧表"></td><td><a href="daily_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=g_"><img src="../../data/icon/true/graph.gif" alt="グラフ"></a></td></tr></table><table style="margin-left: auto"><tr><td><a href="daily_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a3s"><img src="../../data/icon/true/scroll_ari.gif" alt="見出しの固定"></a></td><td><a href="../index.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a3"><img src="../../data/icon/true/2menu.gif" alt="メニューに戻る"></a></td></tr></table><table><tr><td><a href="daily_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=p1"><img src="../../data/icon/true/default.gif" alt="主な要素"></a></td><td><a href="daily_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a1"><img src="../../data/icon/true/ppre.gif" alt="詳細（気圧・降水量）"></a></td><td><a href="daily_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a2"><img src="../../data/icon/true/temvh.gif" alt="詳細（気温・蒸気圧・湿度）"></a></td><td><img src="../../data/icon/sellected/wind.gif" alt="詳細（風）"></td><td><img src="../../data/icon/sellected/sunsnowetc.gif" alt="詳細（日照・雪・その他）"></td></tr></table><table style="float:left"><tr><td><a href="daily_s1.php?prec_no=20&block_no=47417&year=2017&month=09&day=18&view=a3"><img src="../../data/icon/true/year1.gif" alt="前年"></a></td><td><a href="daily_s1.php?prec_no=20&block_no=47417&year=2018&month=08&day=18&view=a3"><img src="../../data/icon/true/month1.gif" alt="前月"></a></td><td><img src="../../data/icon/false/day1.gif" alt="前日"></td><td></td><td><img src="../../data/icon/false/day2.gif" alt="翌日"></td><td><img src="../../data/icon/false/month2.gif" alt="翌月"></td><td><img src="../../data/icon/false/year2.gif" alt="翌年"></td></tr></table><table style="margin-left: auto"><tr><td><a href="monthly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a3"><img src="../../data/icon/true/4monthly.gif" alt="月ごとの値"></a></td><td><a href="10daily_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a3"><img src="../../data/icon/true/4jun.gif" alt="旬ごとの値"></a></td><td><a href="mb5daily_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=18&view=a3"><img src="../../data/icon/true/4hanjun.gif" alt="半旬ごとの値"></a></td><td><img src="../../data/icon/sellected/4daily.gif" alt="日ごとの値"></td></tr></table></div>
+<h3 style='padding:0px;margin-bottom:0px'>帯広　2018年9月（日ごとの値）　詳細（風・日照・雪・その他）</h3>
+<table id='tablefix1' class='data2_s'>
+<tr class="mtx"><th rowspan="4" scope="col">日</th><th rowspan="2" colspan="8" scope="colgroup">風向・風速(m/s)</th><th rowspan="4" scope="col">日照<br />時間<br />(h)</th><th rowspan="2" scope="colgroup">全天日射量<br />(MJ/㎡)</th><th rowspan="2" colspan="2" scope="colgroup">雪(cm)</th><th rowspan="2" scope="colgroup">雲量</th><th rowspan="2" colspan="2" scope="colgroup">天気概況</th></tr><tr></tr>
+<tr class="mtx"><th rowspan="2" scope="col">平均<br />風速</th><th colspan="3" scope="colgroup">最大風速</th><th colspan="3" scope="colgroup">最大瞬間風速</th><th rowspan="2" scope="col">最多<br />風向</th><th rowspan="2" scope="col">合計</th><th colspan="1" scope="colgroup">降雪</th><th colspan="1" scope="colgroup">最深積雪</th><th rowspan="2" scope="col">平均</th><th rowspan="2" scope="col">昼<br />(06:00-18:00)</th><th rowspan="2" scope="col">夜<br />(18:00-翌日06:00)</th></tr>
+<tr class="mtx"><th scope="col">風速</th><th scope="col">風向</th><th scope="col">時分</th><th scope="col">風速</th><th scope="col">風向</th><th scope="col">時分</th><th scope="col">合計</th><th scope="col">値</th></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=1&view=a3">1</a></div></td><td class="data_0_0">1.6</td><td class="data_0_0">5.4</td><td class="data_0_0" style="text-align:center">北西</td><td class="data_0_0">17:53</td><td class="data_0_0">9.5</td><td class="data_0_0" style="text-align:center">西北西</td><td class="data_0_0">17:44</td><td class="data_0_0" style="text-align:center">北北東</td><td class="data_0_0">9.3</td><td class="data_0_0">20.94</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">7.5</td><td class="data_0_0" style="text-align:left">晴</td><td class="data_0_0" style="text-align:left">曇一時雨</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=2&view=a3">2</a></div></td><td class="data_0_0">1.4</td><td class="data_0_0">3.9</td><td class="data_0_0" style="text-align:center">南</td><td class="data_0_0">16:04</td><td class="data_0_0">7.1</td><td class="data_0_0" style="text-align:center">南南西</td><td class="data_0_0">15:05</td><td class="data_0_0" style="text-align:center">北東</td><td class="data_0_0">11.7</td><td class="data_0_0">22.35</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">7.3</td><td class="data_0_0" style="text-align:left">晴後時々薄曇</td><td class="data_0_0" style="text-align:left">曇後一時晴</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=3&view=a3">3</a></div></td><td class="data_0_0">0.9</td><td class="data_0_0">2.4</td><td class="data_0_0" style="text-align:center">西北西</td><td class="data_0_0">05:57</td><td class="data_0_0">4.3</td><td class="data_0_0" style="text-align:center">南東</td><td class="data_0_0">14:40</td><td class="data_0_0" style="text-align:center">南南東</td><td class="data_0_0">0.0</td><td class="data_0_0">6.49</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">10.0</td><td class="data_0_0" style="text-align:left">曇後時々雨</td><td class="data_0_0" style="text-align:left">曇時々雨</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=4&view=a3">4</a></div></td><td class="data_0_0">0.8</td><td class="data_0_0">2.6</td><td class="data_0_0" style="text-align:center">東南東</td><td class="data_0_0">14:03</td><td class="data_0_0">6.8</td><td class="data_0_0" style="text-align:center">東南東</td><td class="data_0_0">13:57</td><td class="data_0_0" style="text-align:center">東南東</td><td class="data_0_0">0.0</td><td class="data_0_0">3.67</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">10.0</td><td class="data_0_0" style="text-align:left">雨</td><td class="data_0_0" style="text-align:left">雨後一時曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=5&view=a3">5</a></div></td><td class="data_0_0">3.2</td><td class="data_0_0">8.7</td><td class="data_0_0" style="text-align:center">南南東</td><td class="data_0_0">03:41</td><td class="data_0_0">21.3</td><td class="data_0_0" style="text-align:center">南東</td><td class="data_0_0">03:34</td><td class="data_0_0" style="text-align:center">南</td><td class="data_0_0">3.8</td><td class="data_0_0">14.73</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">7.0</td><td class="data_0_0" style="text-align:left">曇後晴</td><td class="data_0_0" style="text-align:left">晴一時雨</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=6&view=a3">6</a></div></td><td class="data_0_0">1.9 ]</td><td class="data_0_0">4.9 ]</td><td class="data_0_0" style="text-align:center">南西 ]</td><td class="data_0_0">14:43 ]</td><td class="data_0_0">10.0 ]</td><td class="data_0_0" style="text-align:center">南西 ]</td><td class="data_0_0">14:09 ]</td><td class="data_0_0" style="text-align:center">西北西 ]</td><td class="data_0_0">9.0 )</td><td class="data_0_0">19.27 )</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">1.5</td><td class="data_0_0" style="text-align:left">晴</td><td class="data_0_0" style="text-align:left">晴後曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=7&view=a3">7</a></div></td><td class="data_0_0">1.1 ]</td><td class="data_0_0">2.0 ]</td><td class="data_0_0" style="text-align:center">北北東 ]</td><td class="data_0_0">21:28 ]</td><td class="data_0_0">3.5 ]</td><td class="data_0_0" style="text-align:center">北 ]</td><td class="data_0_0">23:25 ]</td><td class="data_0_0" style="text-align:center">南西 ]</td><td class="data_0_0">×</td><td class="data_0_0">×</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">10.0</td><td class="data_0_0" style="text-align:left">曇後一時雨</td><td class="data_0_0" style="text-align:left">曇後時々雨</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=8&view=a3">8</a></div></td><td class="data_0_0">2.4</td><td class="data_0_0">5.8</td><td class="data_0_0" style="text-align:center">西北西</td><td class="data_0_0">13:06</td><td class="data_0_0">11.0</td><td class="data_0_0" style="text-align:center">北</td><td class="data_0_0">13:17</td><td class="data_0_0" style="text-align:center">北西</td><td class="data_0_0">4.9</td><td class="data_0_0">15.90</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">9.5</td><td class="data_0_0" style="text-align:left">曇一時晴</td><td class="data_0_0" style="text-align:left">曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=9&view=a3">9</a></div></td><td class="data_0_0">1.1</td><td class="data_0_0">3.2</td><td class="data_0_0" style="text-align:center">北西</td><td class="data_0_0">00:35</td><td class="data_0_0">6.0</td><td class="data_0_0" style="text-align:center">北北西</td><td class="data_0_0">00:17</td><td class="data_0_0" style="text-align:center">南</td><td class="data_0_0">0.0</td><td class="data_0_0">6.21</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">10.0</td><td class="data_0_0" style="text-align:left">雨一時曇</td><td class="data_0_0" style="text-align:left">曇時々雨</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=10&view=a3">10</a></div></td><td class="data_0_0">0.9</td><td class="data_0_0">2.4</td><td class="data_0_0" style="text-align:center">西北西</td><td class="data_0_0">04:35</td><td class="data_0_0">3.4</td><td class="data_0_0" style="text-align:center">西北西</td><td class="data_0_0">04:31</td><td class="data_0_0" style="text-align:center">西</td><td class="data_0_0">0.0</td><td class="data_0_0">3.33</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">9.8</td><td class="data_0_0" style="text-align:left">雨一時曇</td><td class="data_0_0" style="text-align:left">　曇一時雨後時々霧</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=11&view=a3">11</a></div></td><td class="data_0_0">1.2 )</td><td class="data_0_0">3.0 )</td><td class="data_0_0" style="text-align:center">北北西 )</td><td class="data_0_0">10:39 )</td><td class="data_0_0">5.1 )</td><td class="data_0_0" style="text-align:center">東北東 )</td><td class="data_0_0">08:12 )</td><td class="data_0_0" style="text-align:center">北東 )</td><td class="data_0_0">7.8</td><td class="data_0_0">14.15 )</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">5.0</td><td class="data_0_0" style="text-align:left">晴一時曇</td><td class="data_0_0" style="text-align:left">晴後曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=12&view=a3">12</a></div></td><td class="data_0_0">1.1</td><td class="data_0_0">3.0</td><td class="data_0_0" style="text-align:center">南</td><td class="data_0_0">16:04</td><td class="data_0_0">6.3</td><td class="data_0_0" style="text-align:center">南</td><td class="data_0_0">15:44</td><td class="data_0_0" style="text-align:center">南南東</td><td class="data_0_0">7.8</td><td class="data_0_0">18.25</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">8.5</td><td class="data_0_0" style="text-align:left">薄曇一時晴</td><td class="data_0_0" style="text-align:left">曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=13&view=a3">13</a></div></td><td class="data_0_0">1.1</td><td class="data_0_0">2.5</td><td class="data_0_0" style="text-align:center">南</td><td class="data_0_0">13:23</td><td class="data_0_0">5.1</td><td class="data_0_0" style="text-align:center">南南東</td><td class="data_0_0">13:19</td><td class="data_0_0" style="text-align:center">南南東</td><td class="data_0_0">3.9</td><td class="data_0_0">13.61</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">7.3</td><td class="data_0_0" style="text-align:left">曇後晴</td><td class="data_0_0" style="text-align:left">晴後曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=14&view=a3">14</a></div></td><td class="data_0_0">1.1</td><td class="data_0_0">2.3</td><td class="data_0_0" style="text-align:center">南南西</td><td class="data_0_0">23:45</td><td class="data_0_0">3.8</td><td class="data_0_0" style="text-align:center">南南西</td><td class="data_0_0">14:00</td><td class="data_0_0" style="text-align:center">南</td><td class="data_0_0">9.4</td><td class="data_0_0">19.16</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">5.0</td><td class="data_0_0" style="text-align:left">晴一時曇</td><td class="data_0_0" style="text-align:left">晴後一時薄曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=15&view=a3">15</a></div></td><td class="data_0_0">1.5</td><td class="data_0_0">3.5</td><td class="data_0_0" style="text-align:center">東南東</td><td class="data_0_0">14:53</td><td class="data_0_0">6.1</td><td class="data_0_0" style="text-align:center">南南東</td><td class="data_0_0">14:26</td><td class="data_0_0" style="text-align:center">東</td><td class="data_0_0">11.3</td><td class="data_0_0">19.00</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">5.3</td><td class="data_0_0" style="text-align:left">晴時々薄曇</td><td class="data_0_0" style="text-align:left">晴一時霧後曇</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=16&view=a3">16</a></div></td><td class="data_0_0">1.1</td><td class="data_0_0">2.3</td><td class="data_0_0" style="text-align:center">東南東</td><td class="data_0_0">17:02</td><td class="data_0_0">4.2</td><td class="data_0_0" style="text-align:center">南東</td><td class="data_0_0">17:00</td><td class="data_0_0" style="text-align:center">東南東</td><td class="data_0_0">0.9</td><td class="data_0_0">8.65</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">10.0</td><td class="data_0_0" style="text-align:left">曇</td><td class="data_0_0" style="text-align:left">曇一時雨</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap"><div class="a_print"><a href="hourly_s1.php?prec_no=20&block_no=47417&year=2018&month=09&day=17&view=a3">17</a></div></td><td class="data_0_0">2.5</td><td class="data_0_0">7.5</td><td class="data_0_0" style="text-align:center">北北西</td><td class="data_0_0">15:00</td><td class="data_0_0">12.4</td><td class="data_0_0" style="text-align:center">北北西</td><td class="data_0_0">14:26</td><td class="data_0_0" style="text-align:center">北西</td><td class="data_0_0">7.7</td><td class="data_0_0">17.77</td><td class="data_0_0">--</td><td class="data_0_0">--</td><td class="data_0_0">4.0</td><td class="data_0_0" style="text-align:left">晴一時曇</td><td class="data_0_0" style="text-align:left">晴</td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">18</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">19</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">20</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">21</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">22</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">23</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">24</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">25</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">26</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">27</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">28</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">29</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+<tr class="mtx" style="text-align:right;"><td style="white-space:nowrap">30</td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:center"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0"></td><td class="data_0_0" style="text-align:left"></td><td class="data_0_0" style="text-align:left"></td></tr>
+</table>
+<div class="print" style="margin-top:1em"><ul class="pagelink"><li><a href="../../data/mdrr/man/remark.html">値欄の記号の説明</a></li></ul></div>
+</div>
+
+<hr class="print" style="color:#DADFEC" />
+<div class="print">
+<table style='margin-left:auto;margin-right:0px'>
+<tr>
+<td><ul class="pagelink mtx"><li><a href="../../data/mdrr/man/first.html">利用される方へ</a></li></ul></td>
+<td><ul class="pagelink mtx"><li><a href="../../data/mdrr/faq/index_k.html">よくある質問（FAQ）</a></li></ul></td>
+<td><ul class="pagelink mtx"><li><a href="../../data/kaisetu/index.html">気象観測統計の解説</a></li></ul></td>
+<td><ul class="pagelink mtx"><li><a href="//www.jma.go.jp/jma/press/tenko.html">年・季節・各月の天候</a></li></ul></td>
+</tr>
+</table>
+</div>
+
+<p class="totop"><a href="#nheader">このページのトップへ</a></p>
+</div>
+</div>
+
+<div id="footer_area"><div id="nfooter"><p>気象庁：〒100-8122東京都千代田区大手町1-3-4  代表電話：03-3212-8341</p><ul><li><a href="//www.jma.go.jp/jma/kishou/info/coment.html">気象庁ホームページについて</a></li></ul></div></div></body>
+</html>
+

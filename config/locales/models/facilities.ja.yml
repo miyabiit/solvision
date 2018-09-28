@@ -5,12 +5,15 @@ ja:
     attributes:
       facility:
         name: '施設名'
-        geocode: 'ジオコード'
+        latitude: '緯度'
+        longitude: '経度'
         capacity_value: '設備容量(kW)'
         capacity_date: '設備容量変更日'
         capacity_unit_count: 'ユニット数'
         sales_type: '買取種別'
         unit_price: '単価(円/kwh)'
+        jma_place_id: 'JMA観測所'
+        nedo_place_id: 'NEDO観測所'
   enumerize:
     facility:
       sales_type:

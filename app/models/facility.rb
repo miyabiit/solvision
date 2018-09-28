@@ -1,6 +1,9 @@
 class Facility < ApplicationRecord
   extend Enumerize
 
+  belongs_to :nedo_place, optional: true
+  belongs_to :jma_place, optional: true
+
   has_many :facility_capacities, dependent: :destroy
   has_many :facility_aliases, dependent: :destroy, inverse_of: :facility
   has_many :facility_projects, dependent: :destroy, inverse_of: :facility
@@ -15,6 +18,7 @@ class Facility < ApplicationRecord
   validates :capacity_unit_count, numericality: { greater_than_or_equal_to: 0, allow_blank: true, only_integer: true }
   validate :capacity_date_is_not_past, if: ->(this) { this.capacity_date.present? }
   validates :unit_price, presence: true, numericality: { greater_than_or_equal_to: 0, allow_blank: true, only_integer: true }
+  validates :longitude, :latitude, numericality: { greater_than_or_equal_to: 0, less_than: 360, allow_blank: true }
 
   attribute :capacity_value, :integer
   attribute :capacity_date, :date

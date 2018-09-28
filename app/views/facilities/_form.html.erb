@@ -16,9 +16,31 @@
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :geocode %>
-    <%= form.text_field :geocode %>
+  <div class="two fields">
+    <div class="field">
+      <%= form.label :latitude %>
+      <%= form.text_field :latitude%>
+    </div>
+
+    <div class="field">
+      <%= form.label :longitude %>
+      <%= form.text_field :longitude %>
+    </div>
+  </div>
+
+  <div class="three fields">
+    <div class="field">
+      <%= form.label :jma_place_id %>
+      <%= form.select :jma_place_id, JmaPlace.options, {include_blank: true}, class: 'ui fluid dropdown' %>
+    </div>
+    <div class="field">
+      <%= form.label :nedo_place_id %>
+      <%= form.select :nedo_place_id, NedoPlace.options, {include_blank: true}, class: 'ui fluid dropdown' %>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <%= link_to '近隣の観測所を設定', set_nearest_facility_path(facility), remote: true, class: 'ui button' %>
+    </div>
   </div>
 
   <div class="field">

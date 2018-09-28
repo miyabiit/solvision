@@ -31,11 +31,11 @@
             <% end %>
           <% end %>
         </td>
-        <td class="right aligned"><%= record.prev_month_rate&.round(1) %></td>
-        <td class="right aligned"><%= record.prev_year_rate&.round(1) %></td>
+        <td class="right aligned"><%= record.prev_month_rate&.round(1) if record.kwh %></td>
+        <td class="right aligned"><%= record.prev_year_rate&.round(1) if record.kwh %></td>
         <td class="right aligned"><%= record.estimate_kwh&.to_i&.to_s(:delimited) %></td>
-        <td class="right aligned"><%= record.neighbor_solar_radiation %></td>
-        <td class="right aligned"><%= record.prev_year_neighbor_solar_radiation %></td>
+        <td class="right aligned"><%= record.solar_radiation %></td>
+        <td class="right aligned"><%= record.prev_year_solar_radiation %></td>
         <td class="right aligned"><%= record.kwh_per_day&.to_i&.to_s(:delimited) %></td>
         <td class="right aligned"><%= record.kwh_per_day_per_unit&.round(3)&.to_s(:delimited) %></td>
       </tr>
