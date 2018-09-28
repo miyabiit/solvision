@@ -9,10 +9,10 @@ namespace :setup do
     end
   end
 
-  desc '過去2年分を対象にJMAスクレイピング'
+  desc '過去3年分を対象にJMAスクレイピング'
   task :generate_jma_data => :environment do
     target_date = Date.today.beginning_of_month
-    date = target_date.ago(2.years).beginning_of_year
+    date = target_date.ago(3.years).beginning_of_year
     while date <= target_date
       FetchJmaDataJob.perform_now(date.to_s(:db))
       date = date.next_month
