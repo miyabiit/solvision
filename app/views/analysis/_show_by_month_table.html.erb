@@ -25,7 +25,7 @@
         <td class="right aligned">
           <% if record.kwh %>
             <%= record.mixed_kwh&.to_i&.to_s(:delimited) %>
-            <% if record.estimate_remains_kwh %>
+            <% if record.estimate_remains_kwh && record.estimate_remains_kwh > 0 %>
               <br>
               (含予測値: <%= record.estimate_remains_kwh&.to_i&.to_s(:delimited) %>)
             <% end %>

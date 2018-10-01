@@ -51,6 +51,8 @@ class MonthlySolar < ApplicationRecord
       if estimate_kwh && estimate_kwh > 0
         self.estimate_remains_kwh = (estimate_kwh / month_days * remains_days)
       end
+    else
+      self.estimate_remains_kwh = nil
     end
     self.mixed_kwh = (kwh || 0) + (estimate_remains_kwh || 0)
     if mixed_kwh > 0
