@@ -9,7 +9,7 @@
     <tr>
       <th>発電施設</th>
       <th>設備容量(kw)</th>
-      <th>発電量(kw)</th>
+      <th>発電量(kwh)</th>
       <th>売電金額(円)</th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
     <% @records.each do |record| %>
       <tr>
         <td><%= link_to record.facility.name, "/analysis/#{@year}/facilities/#{record.facility.id}" %></td>
-        <td><%= record.facility.last_capacity&.value %></td>
+        <td class="right aligned"><%= record.facility.last_capacity&.value %></td>
         <td class="right aligned">
           <% if record.kwh %>
             <%= record.mixed_kwh&.to_i&.to_s(:delimited) %>
@@ -32,5 +32,22 @@
         </td>
       </tr>
     <% end %>
+    <tfoot>
+      <tr class="warning">
+        <td>合計</td>
+        <td class="right aligned"><%= @records.map {|r| r.facility.last_capacity&.value }.compact.sum %></td>
+        <td class="right aligned">
+          <%= @records.map(&:mixed_kwh).compact.sum.to_i.to_s(:delimited) %>
+          <% estimate_sum_kwh = @records.map(&:estimate_remains_kwh).compact.sum %>
+          <% if estimate_sum_kwh > 0 %>
+            <br>
+            (含予測値: <%= estimate_sum_kwh.to_i&.to_s(:delimited) %>)
+          <% end %>
+        </td>
+        <td class="right aligned">
+          <%= @records.map {|r| r.facility.kwh_to_sales(r.mixed_kwh) }.sum.to_i.to_s(:delimited) %>
+        </td>
+      </tr>
+    </tfoot>
   </tbody>
 </table>
