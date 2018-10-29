@@ -5,7 +5,7 @@ set :application, "solvision"
 set :repo_url, "git@github.com:shallontecbiz/solvision.git"
 set :deploy_to, "/home/ec2-user/rails_apps/solvision"
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :keep_releases, 3
+set :keep_releases, 1
 set :bundle_without,  [:development, :test]
 set :user, "ec2-user"
 set :group, "ec2-user"
