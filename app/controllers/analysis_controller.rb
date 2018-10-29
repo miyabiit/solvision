@@ -19,6 +19,7 @@ class AnalysisController < ApplicationController
   def download
     @facilities = Facility.all
     @year = params[:year].to_i
+    @target_date = Date.today
     fetch_year_records
     respond_to do |format|
       format.html
