@@ -14,6 +14,7 @@ class FetchSolarsJob < ApplicationJob
     facilities.each do |facility|
       update_daily_solar(facility)
       update_monthly_solar(facility)
+      setup_monthly_solar_in_year(facility)
     end
   end
 
@@ -47,6 +48,26 @@ class FetchSolarsJob < ApplicationJob
       daily_solar = DailySolar.find_or_initialize_by(facility: facility, date: date)
       daily_solar.kwh = solar_daily_solar.map(&:total_kwh).sum
       daily_solar.save!
+    end
+  end
+
+  def setup_monthly_solar_in_year(facility)
+    calculated_months = MonthlySolar.where(facility_id: facility.id, month: ("#{@target_date.year}01" .. "#{@target_date.year}12")).pluck(:month)
+    return unless calculated_months.count < 12
+    
+    target_date = @target_date.beginning_of_year
+    prev_year_monthly_solars = MonthlySolar.where(facility: facility, month: (target_date.prev_year.strftime('%Y%m') .. target_date.prev_year.end_of_year.strftime('%Y%m'))).order(:month).to_a
+    12.times do |i|
+      month_str = target_date.strftime('%Y%m')
+      unless calculated_months.include?(month_str)
+        prev_year = target_date.prev_year.strftime('%Y%m')
+        prev_year_monthly_solar = prev_year_monthly_solars.find {|ms| ms.month == prev_year }
+        ms = MonthlySolar.find_or_initialize_by(facility: facility, month: target_date.strftime('%Y%m'))
+        ms.calculate(nil, prev_year_monthly_solar, 0)
+        ms.save!
+        puts "Facility[#{facility.id}] initialize monthly_solars on #{month_str}"
+      end
+      target_date = target_date.next_month
     end
   end
 end

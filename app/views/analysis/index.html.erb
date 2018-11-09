@@ -1,20 +1,30 @@
+<project-graph :x-axis-type="'month'" :records='<%= raw render('facility_total_records.json').to_json %>'></project-graph>
+
 <div class="pull-right">
   <%= link_to '売電事業シミュレーションPDF', "/analysis/#{@year}/download.pdf", class: 'ui button primary' %>
 </div>
 
 <analysis-index :year="<%= @year %>"></analysis-index>
+<div class="pull-right">※当月: <%= @month %>月</div>
 
 <table class="table ui">
   <thead>
     <tr>
       <th>発電施設</th>
       <th class="right aligned">設備容量(kw)</th>
-      <th class="right aligned">発電量(kwh)</th>
-      <th class="right aligned">売電金額(円)</th>
+      <th class="right aligned">年間発電量(kwh)</th>
+      <th class="right aligned">前年比(%)</th>
+      <th class="right aligned">年間売電金額(円)</th>
+      <th class="right aligned">当月発電量(kwh)</th>
+      <th class="right aligned">前月比(%)</th>
+      <th class="right aligned">前年同月比(%)</th>
     </tr>
   </thead>
   <tbody>
     <% @records.each do |record| %>
+      <% prev_year_record = @prev_year_records.find {|r| r.facility == record.facility } %>
+      <% target_month = Date.new(@year, @month, 1).strftime('%Y%m') %>
+      <% target_month_record = record.mixed_monthly_solars&.find {|r| r.month == target_month } %>
       <tr>
         <td><%= link_to record.facility.name, "/analysis/#{@year}/facilities/#{record.facility.id}" %></td>
         <td class="right aligned"><%= record.facility.last_capacity&.value %></td>
@@ -28,16 +38,37 @@
           <% end %>
         </td>
         <td class="right aligned">
+          <% if prev_year_record && prev_year_record.mixed_kwh > 0 %>
+            <%= (record.mixed_kwh / prev_year_record.mixed_kwh * 100.0).round(1) %>
+          <% end %>
+        </td>
+        <td class="right aligned">
           <%= record.facility.kwh_to_sales(record.mixed_kwh).to_i.to_s(:delimited) %>
+        </td>
+        <td class="right aligned">
+          <% if target_month_record&.kwh %>
+            <%= target_month_record.mixed_kwh&.to_i&.to_s(:delimited) %>
+            <% if target_month_record.estimate_remains_kwh && target_month_record.estimate_remains_kwh > 0 %>
+              <br>
+              (含予測値: <%= target_month_record.estimate_remains_kwh&.to_i&.to_s(:delimited) %>)
+            <% end %>
+          <% end %>
+        </td>
+        <td class="right aligned">
+          <%= target_month_record&.prev_month_rate&.round(1) %>
+        </td>
+        <td class="right aligned">
+          <%= target_month_record&.prev_year_rate&.round(1) %>
         </td>
       </tr>
     <% end %>
     <tfoot>
       <tr class="warning">
+        <% year_sum_kwh =  @records.map(&:mixed_kwh).compact.sum %>
         <td>合計</td>
         <td class="right aligned"><%= @records.map {|r| r.facility.last_capacity&.value }.compact.sum %></td>
         <td class="right aligned">
-          <%= @records.map(&:mixed_kwh).compact.sum.to_i.to_s(:delimited) %>
+          <%= year_sum_kwh.to_i.to_s(:delimited) %>
           <% estimate_sum_kwh = @records.map(&:estimate_remains_kwh).compact.sum %>
           <% if estimate_sum_kwh > 0 %>
             <br>
@@ -45,7 +76,15 @@
           <% end %>
         </td>
         <td class="right aligned">
+        </td>
+        <td class="right aligned">
           <%= @records.map {|r| r.facility.kwh_to_sales(r.mixed_kwh) }.sum.to_i.to_s(:delimited) %>
+        </td>
+        <td class="right aligned">
+        </td>
+        <td class="right aligned">
+        </td>
+        <td class="right aligned">
         </td>
       </tr>
     </tfoot>
