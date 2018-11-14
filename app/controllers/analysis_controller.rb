@@ -108,6 +108,7 @@ class AnalysisController < ApplicationController
     end
      
     @records = monthly_solars.select { |ms| (from_month .. to_month).include?(ms.month) }
+    @prev_year_records = prev_year_monthly_solars
 
     fetch_shabot_payment(fromym: from_month, toym: to_month, planned: false)
     @shabot_payments_by_month = @shabot_payments.group_by {|p| p.payment_date.strftime('%Y%m') }
