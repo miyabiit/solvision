@@ -21,9 +21,11 @@
     </tr>
   </thead>
   <tbody>
+    <% target_month = Date.new(@year, @month, 1).strftime('%Y%m') %>
+    <% prev_month = Date.new(@year, @month, 1).prev_month.strftime('%Y%m') %>
+    <% prev_year_month = Date.new(@year, @month, 1).prev_year.strftime('%Y%m') %>
     <% @records.each do |record| %>
       <% prev_year_record = @prev_year_records.find {|r| r.facility == record.facility } %>
-      <% target_month = Date.new(@year, @month, 1).strftime('%Y%m') %>
       <% target_month_record = record.mixed_monthly_solars&.find {|r| r.month == target_month } %>
       <tr>
         <td><%= link_to record.facility.name, "/analysis/#{@year}/facilities/#{record.facility.id}" %></td>
@@ -65,6 +67,13 @@
     <tfoot>
       <tr class="warning">
         <% year_sum_kwh =  @records.map(&:mixed_kwh).compact.sum %>
+        <% prev_year_sum_kwh =  @prev_year_records.map(&:mixed_kwh).compact.sum %>
+        <% target_month_records = @records.map {|r| r.mixed_monthly_solars&.find {|r| r.month == target_month } }.compact %>
+        <% prev_month_records = (@records + @prev_year_records).map {|r| r.mixed_monthly_solars&.find {|r| r.month == prev_month} }.compact %>
+        <% prev_year_month_records = @prev_year_records.map {|r| r.mixed_monthly_solars&.find {|r| r.month == prev_year_month } }.compact %>
+        <% target_month_mixed_kwh = target_month_records.map(&:mixed_kwh).compact.sum %>
+        <% prev_month_mixed_kwh = prev_month_records.map(&:mixed_kwh).compact.sum %>
+        <% prev_year_month_mixed_kwh = prev_year_month_records.map(&:mixed_kwh).compact.sum %>
         <td>合計</td>
         <td class="right aligned"><%= @records.map {|r| r.facility.last_capacity&.value }.compact.sum %></td>
         <td class="right aligned">
@@ -76,15 +85,28 @@
           <% end %>
         </td>
         <td class="right aligned">
+          <%= (year_sum_kwh / prev_year_sum_kwh * 100.0).round(1) %>
         </td>
         <td class="right aligned">
           <%= @records.map {|r| r.facility.kwh_to_sales(r.mixed_kwh) }.sum.to_i.to_s(:delimited) %>
         </td>
         <td class="right aligned">
+          <%= target_month_mixed_kwh.to_i.to_s(:delimited) %>
+          <% target_month_estimate_remains_kwh = target_month_records.map(&:estimate_remains_kwh).compact.sum %>
+          <% if target_month_estimate_remains_kwh && target_month_estimate_remains_kwh > 0 %>
+            <br>
+            (含予測値: <%= target_month_estimate_remains_kwh&.to_i&.to_s(:delimited) %>)
+          <% end %>
         </td>
         <td class="right aligned">
+          <% if prev_month_mixed_kwh && prev_month_mixed_kwh > 0 %>
+            <%= (target_month_mixed_kwh / prev_month_mixed_kwh * 100.0).round(1) %>
+          <% end %>
         </td>
         <td class="right aligned">
+          <% if prev_year_month_mixed_kwh && prev_year_month_mixed_kwh > 0 %>
+            <%= (target_month_mixed_kwh / prev_year_month_mixed_kwh * 100.0).round(1) %>
+          <% end %>
         </td>
       </tr>
     </tfoot>
