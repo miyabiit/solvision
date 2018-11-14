@@ -43,11 +43,18 @@
   </tbody>
   <tfoot>
     <tr class="warning">
+      <% year_mixed_kwh = @records.select(&:kwh).map(&:mixed_kwh).compact.sum %>
+      <% prev_year_months = @records.select(&:kwh).map(&:month).map {|m| Date.strptime(m, '%Y%m').prev_year.strftime('%Y%m')} %>
+      <% prev_year_mixed_kwh = @prev_year_records.select {|r| prev_year_months.include?(r.month) }.map(&:mixed_kwh).compact.sum %>
       <td>合計</td>
       <td></td>
-      <td class="right aligned"><%= @records.select(&:kwh).map(&:mixed_kwh).compact.sum.to_i.to_s(:delimited) %></td>
+      <td class="right aligned"><%= year_mixed_kwh.to_i.to_s(:delimited) %></td>
       <td></td>
-      <td></td>
+      <td class="right aligned">
+        <% if prev_year_mixed_kwh > 0 %>
+          <%= (year_mixed_kwh / prev_year_mixed_kwh * 100.0).round(1) %>
+        <% end %>
+      </td>
       <td class="right aligned"><%= @records.map(&:estimate_kwh).compact.sum.to_i.to_s(:delimited) %></td>
       <td></td>
       <td></td>
