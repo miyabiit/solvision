@@ -3,7 +3,10 @@ class AnalysisController < ApplicationController
   before_action :setup_index, only: [:index, :download]
 
   def index
+    @prev_year_records = @facilities.map { |facility| YearSolar.generate(facility, @target_date.prev_year) }
     @records = @facilities.map { |facility| YearSolar.generate(facility, @target_date) }
+    @facility_total_solars = FacilityTotalSolar.generate(@target_date)
+    @month = Date.today.month
   end
 
   def show
