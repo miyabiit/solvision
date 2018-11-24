@@ -48,7 +48,7 @@
           <%= record.facility.kwh_to_sales(record.mixed_kwh).to_i.to_s(:delimited) %>
         </td>
         <td class="right aligned">
-          <% if target_month_record&.kwh %>
+          <% if target_month_record&.mixed_kwh %>
             <%= target_month_record.mixed_kwh&.to_i&.to_s(:delimited) %>
             <% if target_month_record.estimate_remains_kwh && target_month_record.estimate_remains_kwh > 0 %>
               <br>
