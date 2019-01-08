@@ -31,13 +31,7 @@ class FetchSolarsJob < ApplicationJob
       monthly_solar.kwh = sum_kwh
     end
 
-    prev_month_monthly_solar = MonthlySolar.where(facility: facility, month: target_month_date.prev_month.strftime('%Y%m')).first
-    prev_year_monthly_solar = MonthlySolar.where(facility: facility, month: target_month_date.prev_year.strftime('%Y%m')).first
-    monthly_solar.calculate(
-      prev_month_monthly_solar,
-      prev_year_monthly_solar,
-      DailySolar.where(facility: facility, date: (monthly_solar.month_date .. monthly_solar.month_date.end_of_month)).count
-    )
+    monthly_solar.recalculate
 
     monthly_solar.save!
   end

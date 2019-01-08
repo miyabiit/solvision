@@ -54,7 +54,11 @@ class MonthlySolar < ApplicationRecord
     else
       self.estimate_remains_kwh = nil
     end
-    self.mixed_kwh = (kwh || 0) + (estimate_remains_kwh || 0)
+    if input_kwh_enabled? && input_kwh
+      self.mixed_kwh = input_kwh
+    else
+      self.mixed_kwh = (kwh || 0) + (estimate_remains_kwh || 0)
+    end
     if mixed_kwh > 0
       if prev_month_data&.kwh && prev_month_data.kwh > 0
         self.prev_month_rate = (mixed_kwh.to_f / (prev_month_data.mixed_kwh || prev_month_data.kwh) * 100)
@@ -63,6 +67,33 @@ class MonthlySolar < ApplicationRecord
         self.prev_year_rate = (mixed_kwh.to_f / (prev_year_data.mixed_kwh || prev_year_data.kwh) * 100)
       end
     end
+  end
+
+  def recalculate
+    prev_month_monthly_solar = MonthlySolar.where(facility: facility, month: month_date.prev_month.strftime('%Y%m')).first
+    prev_year_monthly_solar = MonthlySolar.where(facility: facility, month: month_date.prev_year.strftime('%Y%m')).first
+    calculate(
+      prev_month_monthly_solar,
+      prev_year_monthly_solar,
+      DailySolar.where(facility: facility, date: (month_date .. month_date.end_of_month)).count
+    )
+  end
+
+  def recalculate_and_save_dependencies!
+    next_month_monthly_solar = MonthlySolar.where(facility: facility, month: month_date.next_month.strftime('%Y%m')).first
+    if next_month_monthly_solar
+      next_month_monthly_solar.recalculate
+      next_month_monthly_solar.save!
+    end
+    next_year_monthly_solar = MonthlySolar.where(facility: facility, month: month_date.next_year.strftime('%Y%m')).first
+    if next_year_monthly_solar
+      next_year_monthly_solar.recalculate
+      next_year_monthly_solar.save!
+    end
+  end
+
+  def display_record?
+    kwh || input_kwh_enabled?
   end
 
   class << self

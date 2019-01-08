@@ -20,6 +20,7 @@ import Vue2Filters from 'vue2-filters'
 import VueC3 from 'vue-c3'
 import ProjectGraph from './project_graph.vue'
 import AnalysisIndex from './analysis_index.vue'
+import InputKwModal from './input_kw_modal.vue'
 
 Vue.component("api-test", ApiTest)
 Vue.component("nav-drawer", NavDrawer)
@@ -32,6 +33,7 @@ Vue.component("vue-numeric", VueNumeric)
 Vue.component("vue-c3", VueC3)
 Vue.component("project-graph", ProjectGraph)
 Vue.component("analysis-index", AnalysisIndex)
+Vue.component("input-kw-modal", InputKwModal)
 
 Vue.use(Vue2Filters)
 
