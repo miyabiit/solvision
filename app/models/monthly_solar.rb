@@ -57,7 +57,7 @@ class MonthlySolar < ApplicationRecord
     if input_kwh_enabled? && input_kwh
       self.mixed_kwh = input_kwh
     else
-      self.mixed_kwh = (kwh || 0) + (estimate_remains_kwh || 0)
+      self.mixed_kwh = solar_mixed_kwh
     end
     if mixed_kwh > 0
       if prev_month_data&.kwh && prev_month_data.kwh > 0
@@ -94,6 +94,18 @@ class MonthlySolar < ApplicationRecord
 
   def display_record?
     kwh || input_kwh_enabled?
+  end
+
+  def solar_mixed_kwh
+    (kwh || 0) + (estimate_remains_kwh || 0)
+  end
+
+  def correction_value_sum
+    if input_kwh_enabled? && input_kwh
+      input_kwh - (estimate_remains_kwh || 0) - (kwh || 0)
+    else
+      0
+    end
   end
 
   class << self

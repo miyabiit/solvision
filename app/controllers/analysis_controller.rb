@@ -59,13 +59,19 @@ class AnalysisController < ApplicationController
         @records << DailySolar.new(facility: @facility, date: target_date)
       end
     end
-    monthly_solar = MonthlySolar.new(facility: @facility, month: @target_date.strftime('%Y%m'))
-    monthly_solar.calculate(nil, prev_year_monthly_solar, 0)
+    monthly_solar = MonthlySolar.find_or_initialize_by(facility: @facility, month: @target_date.strftime('%Y%m'))
+    if monthly_solar.new_record?
+      monthly_solar.calculate(nil, prev_year_monthly_solar, 0)
+    end
     estimate_kwh_per_day = (monthly_solar.estimate_kwh || 0) / @target_date.end_of_month.day
     @records.each do |record|
       record.estimate_kwh = estimate_kwh_per_day
     end
     fetch_shabot_payment(fromym: @target_date.strftime('%Y%m'), toym: @target_date.strftime('%Y%m'))
+
+    @correction_value_sum = monthly_solar.correction_value_sum
+    @correction_value = @correction_value_sum / to_date.day.to_i
+
     render 'show_by_day'
   end
 
