@@ -37,7 +37,7 @@ class FetchSolarsJob < ApplicationJob
   end
 
   def update_daily_solar(facility)
-    solar_daily_solars = SolarDailySolar.where(facility_id: facility.facility_aliases.map(&:solar_facility_id), from: @target_date.beginning_of_month.strftime('%Y%m%d'), to: @target_date.end_of_month.strftime('%Y%m%d'))
+    solar_daily_solars = SolarDailySolar.where(facility_id: facility.facility_aliases.map(&:solar_facility_id), from: @target_date.beginning_of_month.strftime('%Y%m%d'), to: @target_date.strftime('%Y%m%d'))
     solar_daily_solars.group_by(&:date).each do |date, solar_daily_solar|
       daily_solar = DailySolar.find_or_initialize_by(facility: facility, date: date)
       daily_solar.kwh = solar_daily_solar.map(&:total_kwh).sum
