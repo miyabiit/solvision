@@ -12,7 +12,7 @@ class YearSolar
     calculate_mixed_monthly_solars
     self.kwh = mixed_monthly_solars.map(&:kwh).compact.sum
     self.mixed_kwh = mixed_monthly_solars.map(&:mixed_kwh).compact.sum
-    self.estimate_remains_kwh = mixed_monthly_solars.map(&:estimate_remains_kwh).compact.sum
+    self.estimate_remains_kwh = mixed_monthly_solars.select {|mms| !mms.input_kwh_enabled?}.map(&:estimate_remains_kwh).compact.sum
   end
 
   def calculate_mixed_monthly_solars

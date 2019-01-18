@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_103513) do
+ActiveRecord::Schema.define(version: 2019_01_08_131609) do
 
   create_table "daily_solars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "facility_id", null: false
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2018_09_25_103513) do
     t.float "kwh_per_day"
     t.float "kwh_per_day_per_unit"
     t.decimal "mixed_kwh", precision: 16, scale: 4
+    t.boolean "input_kwh_enabled"
+    t.decimal "input_kwh", precision: 16, scale: 4
     t.index ["facility_id"], name: "index_monthly_solars_on_facility_id"
   end
 

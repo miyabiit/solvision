@@ -1,13 +1,15 @@
 sum_kwh = 0
 estimate_sum_kwh = 0
 json_data = @records.map {|record|
-  sum_kwh += record.kwh || record.estimate_kwh || 0
+  kwh = record.kwh || record.estimate_kwh || 0
+  kwh += @correction_value
+  sum_kwh += kwh
   estimate_sum_kwh += record.estimate_kwh || 0
   {
     date: record.date,
     sumKwh: sum_kwh,
     sumKwhEstimate: estimate_sum_kwh,
-    kwh: record.kwh,
+    kwh: kwh,
     kwhEstimate: record.estimate_kwh || 0
   }
 }

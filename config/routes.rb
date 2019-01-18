@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :monthly_solars, only: [] do
+    collection do
+      post ':year/:month/facilities/:facility_id' => 'monthly_solars#update'
+    end
+  end
   resources :monthly_receipts, only: [:index, :new, :edit, :create, :update, :destroy] do
     collection do
       get ':year/:month' => 'monthly_receipts#index'
