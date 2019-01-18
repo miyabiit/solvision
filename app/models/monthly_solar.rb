@@ -37,7 +37,7 @@ class MonthlySolar < ApplicationRecord
     if last_capacity
       if prev_year_data&.kwh
         if prev_year_last_capacity.value > 0
-          self.estimate_kwh = (prev_year_data.kwh.to_f * last_capacity.value / prev_year_last_capacity.value * DEGRADE_RATE)
+          self.estimate_kwh = ((prev_year_data.mixed_kwh || prev_year_data.kwh).to_f * last_capacity.value / prev_year_last_capacity.value * DEGRADE_RATE)
         end
       elsif facility.nedo_place && facility.jma_place
         # NEDO 予測から推定 # TODO: 計算式未定
