@@ -40,8 +40,8 @@
         <td class="right aligned"><%= record.estimate_kwh&.to_i&.to_s(:delimited) %></td>
         <td class="right aligned"><%= record.solar_radiation %></td>
         <td class="right aligned"><%= record.prev_year_solar_radiation %></td>
-        <td class="right aligned"><%= record.kwh_per_day&.to_i&.to_s(:delimited) %></td>
-        <td class="right aligned"><%= record.kwh_per_day_per_unit&.round(3)&.to_s(:delimited) %></td>
+        <td class="right aligned"><%= record.kwh_per_day&.to_i&.to_s(:delimited) if record.display_record? %></td>
+        <td class="right aligned"><%= record.kwh_per_day_per_unit&.round(3)&.to_s(:delimited) if record.display_record? %></td>
       </tr>
     <% end %>
   </tbody>
