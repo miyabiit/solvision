@@ -45,8 +45,6 @@ class MonthlySolar < ApplicationRecord
         #  facility.nedo_place.kwh_by_month(month_days, last_capacity.value) * (facility.jma_place.month_rate(target_date.prev_year))
       end
     end
-    self.kwh_per_day = (kwh.to_f / days) if days > 0
-    self.kwh_per_day_per_unit = (kwh_per_day / last_capacity.value) if kwh_per_day && last_capacity&.value && last_capacity.value > 0
     if remains_days > 0
       if estimate_kwh && estimate_kwh > 0
         self.estimate_remains_kwh = (estimate_kwh / month_days * remains_days)
@@ -67,6 +65,8 @@ class MonthlySolar < ApplicationRecord
         self.prev_year_rate = (mixed_kwh.to_f / (prev_year_data.mixed_kwh || prev_year_data.kwh) * 100)
       end
     end
+    self.kwh_per_day = ((mixed_kwh || kwh).to_f / month_days)
+    self.kwh_per_day_per_unit = (kwh_per_day / last_capacity.value) if kwh_per_day && last_capacity&.value && last_capacity.value > 0
   end
 
   def recalculate
