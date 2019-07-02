@@ -39,7 +39,7 @@
     </div>
     <div class="field">
       <label>&nbsp;</label>
-      <%= link_to '近隣の観測所を設定', set_nearest_facility_path(facility), remote: true, class: 'ui button' %>
+      <%= link_to '近隣の観測所を設定', set_nearest_facility_path(facility), remote: true, class: 'ui button' unless facility.new_record? %>
     </div>
   </div>
 
