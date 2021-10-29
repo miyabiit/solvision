@@ -36,6 +36,8 @@ append :linked_files, "config/puma.rb"
 append :linked_files, "config/master.key"
 set :linked_dirs, %w{log data tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle node_modules public/.well-known}
 
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+
 set :nginx_use_ssl, true
 set :nginx_ssl_certificate, '/etc/letsencrypt/live/solar.shallontec.biz/fullchain.pem'
 set :nginx_ssl_certificate_key, '/etc/letsencrypt/live/solar.shallontec.biz/privkey.pem'
